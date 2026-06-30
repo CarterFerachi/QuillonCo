@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuillonCo — Southern Sportswear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Raleway',sans-serif;color:#2A2A2A;background:#FAFAF7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+ul{list-style:none}
+
+:root{
+  --navy:#1C2B4A;
+  --gold:#C4973B;
+  --cream:#F5EFE0;
+  --green:#2C5530;
+  --charcoal:#2A2A2A;
+  --gray:#6B6B6B;
+  --light:#E8E4DC;
+}
+
+/* ANNOUNCEMENT */
+.ann{background:var(--navy);color:var(--cream);text-align:center;padding:.6rem 1rem;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.ann span{color:var(--gold)}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;background:#FAFAF7;border-bottom:1px solid var(--light);padding:0 2.5rem}
+.hdr-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px;max-width:1200px;margin:0 auto;gap:2rem}
+.hdr-nav{display:flex;gap:2.5rem}
+.hdr-nav a{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--charcoal);padding-bottom:2px;border-bottom:1.5px solid transparent;transition:.2s}
+.hdr-nav a:hover{color:var(--navy);border-bottom-color:var(--gold)}
+.logo{text-align:center}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:600;letter-spacing:.05em;color:var(--navy);line-height:1}
+.logo-text em{color:var(--gold);font-style:italic}
+.logo-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-top:2px;font-weight:500}
+.hdr-actions{display:flex;align-items:center;justify-content:flex-end;gap:1.25rem}
+.hdr-btn{color:var(--charcoal);display:flex;align-items:center;justify-content:center;transition:.2s;position:relative;cursor:pointer}
+.hdr-btn:hover{color:var(--navy)}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--gold);color:#fff;font-size:.55rem;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+
+/* HERO */
+.hero{position:relative;height:92vh;min-height:560px;max-height:900px;overflow:hidden;display:flex;align-items:center}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(28,43,74,.75) 0%,rgba(28,43,74,.45) 55%,rgba(28,43,74,.08) 100%)}
+.hero-content{position:relative;z-index:1;color:#fff;max-width:580px;padding:0 2.5rem}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.hero-head{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:.75rem 0 1.5rem}
+.hero-head em{font-style:italic;color:#d4a84e}
+.hero-body{font-size:1.05rem;font-weight:300;line-height:1.75;color:rgba(245,239,224,.88);margin-bottom:2.5rem;max-width:460px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 2rem;font-family:'Raleway',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid transparent;cursor:pointer;transition:all .25s;white-space:nowrap}
+.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-gold:hover{background:#b08630;border-color:#b08630;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-outline{background:transparent;color:#fff;border-color:#fff}
+.btn-outline:hover{background:#fff;color:var(--navy)}
+.btn-navy{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-navy:hover{background:#111c33;transform:translateY(-1px);box-shadow:0 6px 20px rgba(28,43,74,.3)}
+.btn-secondary{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn-secondary:hover{background:var(--navy);color:#fff}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:1;color:rgba(255,255,255,.5);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* VALUES */
+.values{background:var(--navy);padding:2rem 0;border-top:3px solid var(--gold)}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:1200px;margin:0 auto;padding:0 2.5rem}
+.val{display:flex;align-items:center;gap:1rem;color:var(--cream)}
+.val-icon{color:var(--gold);flex-shrink:0}
+.val-text strong{display:block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream)}
+.val-text span{font-size:.7rem;color:rgba(245,239,224,.55)}
+
+/* SECTION HEADER */
+.sec{padding:5rem 0}
+.sec-hdr{text-align:center;margin-bottom:3.5rem}
+.sec-hdr .eyebrow{display:block;margin-bottom:.75rem}
+.sec-hdr h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--navy);margin-bottom:1rem;line-height:1.15}
+.sec-hdr p{color:var(--gray);font-size:1.05rem;max-width:500px;margin:0 auto}
+.container{max-width:1200px;margin:0 auto;padding:0 2.5rem}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.prod-card{display:flex;flex-direction:column;position:relative}
+.prod-media{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--cream);margin-bottom:1rem}
+.prod-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod-card:hover .prod-media img{transform:scale(1.05)}
+.prod-badge{position:absolute;top:.75rem;left:.75rem;background:var(--green);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px}
+.prod-qa{position:absolute;bottom:0;left:0;right:0;background:var(--navy);color:#fff;text-align:center;padding:1rem;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transform:translateY(100%);transition:.28s}
+.prod-card:hover .prod-qa{transform:translateY(0)}
+.prod-vendor{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.2rem}
+.prod-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:500;color:var(--navy);margin-bottom:.5rem;line-height:1.3}
+.prod-price{font-size:.85rem;font-weight:700;color:var(--charcoal)}
+.prod-swatches{display:flex;gap:.5rem;margin-top:.75rem}
+.swatch{width:16px;height:16px;border-radius:999px;border:1.5px solid var(--light)}
+.sec-cta{text-align:center;margin-top:3rem}
+
+/* SHOWCASE */
+.showcase-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:1rem;height:580px}
+.sc-card{position:relative;overflow:hidden;display:flex;align-items:flex-end;cursor:pointer}
+.sc-card img,.sc-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.sc-card:hover img{transform:scale(1.05)}
+.sc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,43,74,.82) 0%,rgba(28,43,74,.1) 65%)}
+.sc-content{position:relative;z-index:1;padding:2rem;color:#fff}
+.sc-label{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem}
+.sc-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:500;color:#fff;margin-bottom:1rem;line-height:1.2}
+.sc-link{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--cream);border-bottom:1px solid var(--gold);padding-bottom:2px;display:inline-block;transition:.2s}
+.sc-card:hover .sc-link{color:var(--gold)}
+
+/* BRAND STORY */
+.story{background:var(--cream)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;min-height:580px}
+.story-media{position:relative;overflow:hidden}
+.story-media img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.story-content{display:flex;align-items:center;padding:4rem 5rem}
+.story-inner{max-width:440px}
+.story-head{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.75rem);font-weight:500;color:var(--navy);line-height:1.15;margin:.75rem 0 1.5rem}
+.story-body{color:var(--gray);font-size:1rem;line-height:1.85;margin-bottom:2rem}
+.story-sig{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;color:var(--navy);margin-top:2rem;padding-top:1.5rem;border-top:1px solid #EDE4CE}
+
+/* TESTIMONIALS */
+.testi{background:var(--navy);padding:5rem 0}
+.testi-head{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:500;color:var(--cream);text-align:center;margin:.75rem 0 1rem}
+.testi-sub{color:rgba(245,239,224,.6);text-align:center;font-size:1rem;margin-bottom:3.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.tc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:2rem;transition:.25s}
+.tc:hover{background:rgba(255,255,255,.1);border-color:rgba(196,151,59,.4)}
+.tc-stars{display:flex;gap:3px;margin-bottom:1.25rem;color:var(--gold)}
+.tc-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.7;color:var(--cream);margin-bottom:1.5rem}
+.tc-author{display:flex;align-items:center;gap:1rem}
+.tc-avatar{width:42px;height:42px;border-radius:999px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-weight:600;flex-shrink:0}
+.tc-name{font-weight:700;font-size:.8rem;color:var(--cream);letter-spacing:.04em}
+.tc-loc{font-size:.7rem;color:rgba(245,239,224,.5);letter-spacing:.06em}
+
+/* NEWSLETTER */
+.nl{background:var(--cream);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+.nl::before{content:'QC';position:absolute;font-family:'Playfair Display',serif;font-size:18rem;font-weight:700;color:#EDE4CE;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;letter-spacing:-.05em;opacity:.7}
+.nl-inner{position:relative;z-index:1;max-width:540px;margin:0 auto}
+.nl-head{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:500;color:var(--navy);line-height:1.15;margin:.75rem 0 1rem}
+.nl-body{color:var(--gray);font-size:1rem;line-height:1.75;margin-bottom:2rem}
+.nl-form{display:flex;gap:.75rem;max-width:460px;margin:0 auto 1rem}
+.nl-input{flex:1;padding:.9rem 1.25rem;border:1.5px solid #EDE4CE;border-radius:2px;background:#FAFAF7;font-size:.85rem;color:var(--charcoal);outline:none;font-family:'Raleway',sans-serif;transition:.2s}
+.nl-input:focus{border-color:var(--navy)}
+.nl-input::placeholder{color:var(--gray)}
+.nl-note{font-size:.7rem;color:var(--gray)}
+
+/* FOOTER */
+.ftr{background:var(--charcoal);color:var(--cream);padding-top:4rem}
+.ftr-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(245,239,224,.1)}
+.ftr-logo{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:600;letter-spacing:.05em;color:var(--cream);margin-bottom:.75rem}
+.ftr-logo em{color:var(--gold);font-style:italic}
+.ftr-tag{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:1rem}
+.ftr-desc{font-size:.8rem;color:rgba(245,239,224,.55);line-height:1.75;margin-bottom:1.5rem}
+.ftr-social{display:flex;gap:.75rem}
+.ftr-soc{width:34px;height:34px;border-radius:999px;border:1px solid rgba(245,239,224,.2);display:flex;align-items:center;justify-content:center;color:var(--cream);transition:.2s;font-size:.7rem;font-weight:700}
+.ftr-soc:hover{border-color:var(--gold);background:var(--gold)}
+.ftr-col-title{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream);margin-bottom:1.25rem}
+.ftr-links{display:flex;flex-direction:column;gap:.75rem}
+.ftr-link{font-size:.8rem;color:rgba(245,239,224,.55);transition:.2s}
+.ftr-link:hover{color:var(--gold)}
+.ftr-bottom{padding:1.5rem 0;display:flex;align-items:center;justify-content:space-between}
+.ftr-copy{font-size:.7rem;color:rgba(245,239,224,.35);letter-spacing:.04em}
+.payments{display:flex;gap:.5rem}
+.pay{background:rgba(255,255,255,.1);border-radius:3px;padding:2px 7px;font-size:.6rem;font-weight:700;letter-spacing:.05em;color:var(--cream);text-transform:uppercase}
+
+/* PRODUCT IMAGES (fake cards) */
+.img-placeholder{width:100%;height:100%;object-fit:cover}
+
+@media(max-width:1024px){
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .ftr-main{grid-template-columns:1fr 1fr;gap:2rem}
+  .showcase-grid{grid-template-columns:1fr 1fr;height:auto}
+  .showcase-grid > :first-child{grid-column:1/-1;height:360px}
+  .sc-card{height:280px}
+  .story-grid{grid-template-columns:1fr}
+  .story-media{height:380px}
+  .story-content{padding:3rem 2.5rem}
+  .testi-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .hdr-nav,.hdr-actions > :not(.hdr-btn:last-child){display:none}
+  .hdr-inner{grid-template-columns:auto 1fr auto}
+  .values-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .ftr-main{grid-template-columns:1fr}
+  .nl-form{flex-direction:column}
+  .testi-grid{grid-template-columns:1fr}
+  .hero-content{padding:0 1.5rem}
+  .container{padding:0 1.5rem}
+  .hero-head{font-size:clamp(2.5rem,9vw,4rem)}
+  .ftr-bottom{flex-direction:column;gap:1rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="ann">Complimentary shipping on orders over $150 &nbsp;&middot;&nbsp; Crafted in the <span>American South</span></div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <nav class="hdr-nav">
+      <a href="#">Shop</a>
+      <a href="#">Collections</a>
+      <a href="#">Our Story</a>
+      <a href="#">Journal</a>
+    </nav>
+    <div class="logo">
+      <div class="logo-text">Quillon<em>Co</em></div>
+      <div class="logo-tag">Southern Sportswear</div>
+    </div>
+    <div class="hdr-actions">
+      <a href="#" class="hdr-btn" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="#" class="hdr-btn" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+      <a href="#" class="hdr-btn" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">2</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="Southern gentleman in navy polo on golf course" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">New Collection &mdash; Summer 2025</p>
+    <h1 class="hero-head">Dressed<br>for the<br><em>South</em></h1>
+    <p class="hero-body">Collared polo shirts crafted for the gentleman who never compromises &mdash; built for the fairway, the field, and the front porch.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn btn-gold">Shop the Collection</a>
+      <a href="#" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- VALUES -->
+<div class="values">
+  <div class="values-grid">
+    <div class="val">
+      <div class="val-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="val-text"><strong>Free Shipping</strong><span>On orders over $150</span></div>
+    </div>
+    <div class="val">
+      <div class="val-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="val-text"><strong>Premium Quality</strong><span>Crafted to last a lifetime</span></div>
+    </div>
+    <div class="val">
+      <div class="val-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <div class="val-text"><strong>Easy Returns</strong><span>30-day guarantee</span></div>
+    </div>
+    <div class="val">
+      <div class="val-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="val-text"><strong>Made with Pride</strong><span>Southern craftsmanship</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED COLLECTION -->
+<section class="sec">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="eyebrow">The Collection</span>
+      <h2>Refined for Every Occasion</h2>
+      <p>Polo shirts that move with you &mdash; from the golf course to the evening social.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233900_c864c65c-63c1-4418-b34e-d804ae2b502a.png" alt="Navy Heritage Polo" loading="lazy">
+          <span class="prod-badge">New</span>
+          <div class="prod-qa">Quick Add</div>
+        </div>
+        <div class="prod-vendor">QuillonCo</div>
+        <div class="prod-title">The Heritage Polo &mdash; Navy</div>
+        <div class="prod-price">$128.00</div>
+        <div class="prod-swatches">
+          <div class="swatch" style="background:#1C2B4A" title="Navy"></div>
+          <div class="swatch" style="background:#2C5530" title="Forest Green"></div>
+          <div class="swatch" style="background:#F5EFE0;border-color:#ccc" title="Cream"></div>
+          <div class="swatch" style="background:#8B1A1A" title="Crimson"></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233909_d46895f2-77e1-4a47-baa4-b4bc98a062af.png" alt="Forest Green Polo" loading="lazy">
+          <div class="prod-qa">Quick Add</div>
+        </div>
+        <div class="prod-vendor">QuillonCo</div>
+        <div class="prod-title">The Heritage Polo &mdash; Forest</div>
+        <div class="prod-price">$128.00</div>
+        <div class="prod-swatches">
+          <div class="swatch" style="background:#2C5530" title="Forest Green"></div>
+          <div class="swatch" style="background:#1C2B4A" title="Navy"></div>
+          <div class="swatch" style="background:#8B6914" title="Bourbon"></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Active Series Polo" loading="lazy">
+          <span class="prod-badge" style="background:var(--gold)">Bestseller</span>
+          <div class="prod-qa">Quick Add</div>
+        </div>
+        <div class="prod-vendor">QuillonCo</div>
+        <div class="prod-title">The Active Series &mdash; Club Stripe</div>
+        <div class="prod-price">$148.00</div>
+        <div class="prod-swatches">
+          <div class="swatch" style="background:#fff;border-color:#ccc" title="White"></div>
+          <div class="swatch" style="background:#1C2B4A" title="Navy"></div>
+          <div class="swatch" style="background:#8B1A1A" title="Crimson"></div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234027_f8f9f7c5-8020-43f8-99f4-a31b75536873.png" alt="Collar Detail" loading="lazy">
+          <div class="prod-qa">Quick Add</div>
+        </div>
+        <div class="prod-vendor">QuillonCo</div>
+        <div class="prod-title">The Club Polo &mdash; Signature</div>
+        <div class="prod-price">$158.00</div>
+        <div class="prod-swatches">
+          <div class="swatch" style="background:#1C2B4A" title="Navy"></div>
+          <div class="swatch" style="background:#2C5530" title="Forest"></div>
+          <div class="swatch" style="background:#2A2A2A" title="Charcoal"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sec-cta">
+      <a href="#" class="btn btn-secondary">View All Styles</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION SHOWCASE -->
+<section class="sec" style="background:var(--cream);padding:3rem 0 5rem">
+  <div class="container" style="max-width:1440px">
+    <div class="sec-hdr">
+      <span class="eyebrow">Shop by Style</span>
+      <h2>Find Your Fit</h2>
+    </div>
+    <div class="showcase-grid">
+      <div class="sc-card">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="Heritage Collection" loading="lazy">
+        <div class="sc-overlay"></div>
+        <div class="sc-content">
+          <div class="sc-label">Bestseller</div>
+          <h3 class="sc-title">The Heritage Polo</h3>
+          <a href="#" class="sc-link">Shop Now</a>
+        </div>
+      </div>
+      <div class="sc-card">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Active Series" loading="lazy">
+        <div class="sc-overlay"></div>
+        <div class="sc-content">
+          <div class="sc-label">Performance</div>
+          <h3 class="sc-title">The Active Series</h3>
+          <a href="#" class="sc-link">Shop Now</a>
+        </div>
+      </div>
+      <div class="sc-card">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233909_d46895f2-77e1-4a47-baa4-b4bc98a062af.png" alt="Club Collection" loading="lazy">
+        <div class="sc-overlay"></div>
+        <div class="sc-content">
+          <div class="sc-label">Limited Edition</div>
+          <h3 class="sc-title">The Club Collection</h3>
+          <a href="#" class="sc-link">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="story">
+  <div class="story-grid">
+    <div class="story-media">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233809_257d39fb-75c5-4724-bccf-f1d588241b5b.png" alt="Southern lifestyle" loading="lazy">
+    </div>
+    <div class="story-content">
+      <div class="story-inner">
+        <p class="eyebrow">Our Heritage</p>
+        <h2 class="story-head">Born on the Back Porch, Built for the Best</h2>
+        <div class="story-body">
+          <p style="margin-bottom:1rem">QuillonCo was born from a simple belief: that a man should dress as well on the golf course as he does at the dinner table. Our polo shirts marry the relaxed confidence of southern living with the clean lines of modern sportswear.</p>
+          <p>Every shirt is cut from premium pique cotton, finished with signature details, and designed to carry you from the first tee to the last glass with effortless ease.</p>
+        </div>
+        <a href="#" class="btn btn-navy">Discover Our Story</a>
+        <div class="story-sig">&mdash; The QuillonCo Family</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="container">
+    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:.75rem">What They're Saying</span>
+    <h2 class="testi-head">Worn with Pride</h2>
+    <p class="testi-sub">From the fairway to the front porch, QuillonCo gentlemen share their stories.</p>
+    <div class="testi-grid">
+      <div class="tc">
+        <div class="tc-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tc-quote">&ldquo;This is the finest polo shirt I've ever owned. The fit is impeccable and the fabric feels like wearing a handshake.&rdquo;</p>
+        <div class="tc-author"><div class="tc-avatar">J</div><div><div class="tc-name">James Whitfield</div><div class="tc-loc">Charleston, SC</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tc-quote">&ldquo;QuillonCo gets southern style right. It's sharp enough for church and comfortable enough for a long day on the course.&rdquo;</p>
+        <div class="tc-author"><div class="tc-avatar">T</div><div><div class="tc-name">Thomas Beaumont</div><div class="tc-loc">Savannah, GA</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tc-quote">&ldquo;I bought three. My wife bought me two more. That should tell you everything you need to know.&rdquo;</p>
+        <div class="tc-author"><div class="tc-avatar">W</div><div><div class="tc-name">William Hargrove</div><div class="tc-loc">Nashville, TN</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl">
+  <div class="nl-inner">
+    <span class="eyebrow">Join the Club</span>
+    <h2 class="nl-head">The Gentleman&rsquo;s Dispatch</h2>
+    <p class="nl-body">Subscribe for new arrivals, exclusive member offers, and stories from the South. No spam, ever.</p>
+    <form class="nl-form" onsubmit="return false">
+      <input type="email" class="nl-input" placeholder="your@email.com">
+      <button type="submit" class="btn btn-navy">Subscribe</button>
+    </form>
+    <p class="nl-note">We respect your privacy. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ftr">
+  <div class="container">
+    <div class="ftr-main">
+      <div>
+        <div class="ftr-logo">Quillon<em>Co</em></div>
+        <div class="ftr-tag">Southern Sportswear</div>
+        <p class="ftr-desc">Premium polo shirts crafted for the southern gentleman. Built for the course, worn for life.</p>
+        <div class="ftr-social">
+          <a href="#" class="ftr-soc" aria-label="Instagram">IG</a>
+          <a href="#" class="ftr-soc" aria-label="Facebook">FB</a>
+          <a href="#" class="ftr-soc" aria-label="Pinterest">PT</a>
+        </div>
+      </div>
+      <div>
+        <h3 class="ftr-col-title">Shop</h3>
+        <ul class="ftr-links">
+          <li><a href="#" class="ftr-link">All Polos</a></li>
+          <li><a href="#" class="ftr-link">Heritage Collection</a></li>
+          <li><a href="#" class="ftr-link">Active Series</a></li>
+          <li><a href="#" class="ftr-link">Club Collection</a></li>
+          <li><a href="#" class="ftr-link">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ftr-col-title">Company</h3>
+        <ul class="ftr-links">
+          <li><a href="#" class="ftr-link">Our Story</a></li>
+          <li><a href="#" class="ftr-link">Journal</a></li>
+          <li><a href="#" class="ftr-link">Careers</a></li>
+          <li><a href="#" class="ftr-link">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ftr-col-title">Support</h3>
+        <ul class="ftr-links">
+          <li><a href="#" class="ftr-link">Shipping & Returns</a></li>
+          <li><a href="#" class="ftr-link">Size Guide</a></li>
+          <li><a href="#" class="ftr-link">Care Instructions</a></li>
+          <li><a href="#" class="ftr-link">Contact Us</a></li>
+          <li><a href="#" class="ftr-link">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-bottom">
+      <p class="ftr-copy">&copy; 2025 QuillonCo. All rights reserved.</p>
+      <div class="payments">
+        <span class="pay">Visa</span>
+        <span class="pay">MC</span>
+        <span class="pay">Amex</span>
+        <span class="pay">PayPal</span>
+        <span class="pay">Shop Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
