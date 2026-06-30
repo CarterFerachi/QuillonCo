@@ -1,0 +1,48 @@
+<section class="values-strip">
+  <div class="container">
+    <div class="values-strip__grid">
+      {%- for i in (1..4) -%}
+        {%- assign icon_id = 'icon_' | append: i -%}
+        {%- assign title_id = 'title_' | append: i -%}
+        {%- assign text_id = 'text_' | append: i -%}
+        {%- if section.settings[title_id] != blank -%}
+          <div class="value-item">
+            <div class="value-item__icon">
+              {%- case i -%}
+                {%- when 1 -%}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                {%- when 2 -%}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {%- when 3 -%}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                {%- when 4 -%}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              {%- endcase -%}
+            </div>
+            <div class="value-item__text">
+              <strong>{{ section.settings[title_id] }}</strong>
+              <span>{{ section.settings[text_id] }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Values Strip",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Value 1 title", "default": "Free Shipping" },
+    { "type": "text", "id": "text_1", "label": "Value 1 text", "default": "On orders over $150" },
+    { "type": "text", "id": "title_2", "label": "Value 2 title", "default": "Premium Quality" },
+    { "type": "text", "id": "text_2", "label": "Value 2 text", "default": "Crafted to last" },
+    { "type": "text", "id": "title_3", "label": "Value 3 title", "default": "Easy Returns" },
+    { "type": "text", "id": "text_3", "label": "Value 3 text", "default": "30-day guarantee" },
+    { "type": "text", "id": "title_4", "label": "Value 4 title", "default": "Made with Heart" },
+    { "type": "text", "id": "text_4", "label": "Value 4 text", "default": "Southern pride in every stitch" }
+  ],
+  "presets": [{ "name": "Values Strip" }]
+}
+{% endschema %}

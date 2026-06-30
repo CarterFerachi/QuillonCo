@@ -1,0 +1,103 @@
+<style>
+  .site-header { background-color: {{ section.settings.bg_color }}; }
+</style>
+
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+
+      <!-- Mobile toggle -->
+      <button class="header-mobile-toggle" aria-label="Open navigation" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Desktop nav -->
+      <nav class="header-nav" role="navigation" aria-label="Main navigation">
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.links != blank -%}
+            <div class="header-nav__dropdown-wrap">
+              <a href="{{ link.url }}" class="header-nav__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="header-nav__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href="/" class="header-logo__link" aria-label="{{ shop.name }} home">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="auto" loading="eager">
+          {%- else -%}
+            <div class="header-logo__text">
+              Quillon<em>Co</em>
+            </div>
+            <div class="header-logo__tagline">Southern Sportswear</div>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <a href="/account" class="header-actions__btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        <a href="/search" class="header-actions__btn" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </a>
+        <button class="header-actions__btn" data-open-cart aria-label="Open cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" aria-label="Cart item count"
+            style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">
+            {{ cart.item_count }}
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <div class="mobile-nav__header">
+    <div class="mobile-nav__logo">Quillon<em style="color:var(--color-gold);font-style:italic">Co</em></div>
+    <button class="mobile-nav__close" aria-label="Close navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-nav__links">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+    {%- endfor -%}
+  </div>
+  <div class="mobile-nav__footer">Southern Sportswear Since 2024</div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FAFAF7" }
+  ]
+}
+{% endschema %}

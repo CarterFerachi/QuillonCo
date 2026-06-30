@@ -1,0 +1,59 @@
+<section class="section-padding">
+  <div class="container container--wide">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="heading-lg">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="collection-showcase__grid">
+      {%- for block in section.blocks -%}
+        <div class="showcase-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title }}" class="showcase-card__image" loading="lazy">
+          {%- else -%}
+            <div class="showcase-card__placeholder showcase-card__placeholder--{{ forloop.index }}"></div>
+          {%- endif -%}
+          <div class="showcase-card__overlay"></div>
+          <div class="showcase-card__content">
+            <div class="showcase-card__label">{{ block.settings.label }}</div>
+            <h3 class="showcase-card__title">{{ block.settings.title }}</h3>
+            <a href="{{ block.settings.link }}" class="showcase-card__link">Shop Now</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Showcase",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by Style" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find Your Fit" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Showcase Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "default": "The Heritage Polo" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Showcase",
+      "blocks": [
+        { "type": "card", "settings": { "label": "Bestseller", "title": "The Heritage Polo", "link": "/collections/heritage" }},
+        { "type": "card", "settings": { "label": "Performance", "title": "The Active Series", "link": "/collections/active" }},
+        { "type": "card", "settings": { "label": "Limited Edition", "title": "The Club Collection", "link": "/collections/club" }}
+      ]
+    }
+  ]
+}
+{% endschema %}

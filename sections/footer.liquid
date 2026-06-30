@@ -1,0 +1,88 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-main">
+
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <div class="footer-brand__logo">Quillon<em>Co</em></div>
+        <div class="footer-brand__tagline">{{ section.settings.tagline | default: 'Southern Sportswear' }}</div>
+        <p class="footer-brand__description">{{ section.settings.description }}</p>
+
+        <div class="footer-social">
+          {%- if section.settings.instagram != blank -%}
+            <a href="{{ section.settings.instagram }}" class="footer-social__link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.facebook != blank -%}
+            <a href="{{ section.settings.facebook }}" class="footer-social__link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.twitter != blank -%}
+            <a href="{{ section.settings.twitter }}" class="footer-social__link" aria-label="X / Twitter" rel="noopener noreferrer" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Nav columns -->
+      {%- for block in section.blocks -%}
+        <div class="footer-col" {{ block.shopify_attributes }}>
+          <h3 class="footer-col__title">{{ block.settings.title }}</h3>
+          <ul class="footer-col__links">
+            {%- for link in block.settings.menu.links -%}
+              <li><a href="{{ link.url }}" class="footer-col__link">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer-bottom__payments">
+        <span class="payment-icon">Visa</span>
+        <span class="payment-icon">MC</span>
+        <span class="payment-icon">Amex</span>
+        <span class="payment-icon">PayPal</span>
+        <span class="payment-icon">Shop Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Southern Sportswear" },
+    { "type": "textarea", "id": "description", "label": "Brand description", "default": "Premium polo shirts crafted for the southern gentleman. Built for the course, worn for life." },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "facebook", "label": "Facebook URL" },
+    { "type": "url", "id": "twitter", "label": "X / Twitter URL" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Column title" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "title": "Shop" }},
+        { "type": "menu", "settings": { "title": "Company" }},
+        { "type": "menu", "settings": { "title": "Support" }}
+      ]
+    }
+  ]
+}
+{% endschema %}
