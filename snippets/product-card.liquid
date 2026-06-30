@@ -1,0 +1,61 @@
+{%- assign card_product = product -%}
+
+<article class="product-card">
+  <div class="product-card__media">
+    <a href="{{ card_product.url }}" tabindex="-1" aria-hidden="true">
+      {%- if card_product.featured_image -%}
+        <img
+          src="{{ card_product.featured_image | image_url: width: 600 }}"
+          alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+          class="product-card__image"
+          loading="lazy"
+          width="{{ card_product.featured_image.width }}"
+          height="{{ card_product.featured_image.height }}"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__image' }}
+      {%- endif -%}
+    </a>
+
+    {%- if card_product.available == false -%}
+      <span class="product-card__badge">Sold Out</span>
+    {%- elsif card_product.compare_at_price > card_product.price -%}
+      <span class="product-card__badge product-card__badge--sale">Sale</span>
+    {%- elsif card_product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%SZ' -%}
+      <span class="product-card__badge">New</span>
+    {%- endif -%}
+
+    <button class="product-card__quick-add" data-product-id="{{ card_product.id }}" aria-label="Quick add {{ card_product.title }}">
+      Quick Add
+    </button>
+  </div>
+
+  <div class="product-card__info">
+    {%- if card_product.vendor != blank -%}
+      <div class="product-card__vendor">{{ card_product.vendor }}</div>
+    {%- endif -%}
+
+    <a href="{{ card_product.url }}" class="product-card__title">{{ card_product.title }}</a>
+
+    <div class="product-card__price">
+      {%- if card_product.compare_at_price > card_product.price -%}
+        <span class="price--compare">{{ card_product.compare_at_price | money }}</span>
+        <span class="price--sale">{{ card_product.price | money }}</span>
+      {%- else -%}
+        <span>{{ card_product.price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if card_product.variants.size > 1 -%}
+      <div class="product-card__swatches">
+        {%- for variant in card_product.variants limit: 5 -%}
+          {%- if variant.option1 != blank -%}
+            <div class="color-swatch" title="{{ variant.option1 }}"
+              style="background-color: {{ variant.option1 | downcase | replace: ' ', '' }}">
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>

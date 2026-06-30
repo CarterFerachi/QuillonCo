@@ -1,0 +1,36 @@
+{
+  "general": {
+    "password_page": { "login_form_heading": "Enter store using password", "login_form_password_label": "Password", "login_form_password_placeholder": "Your password", "login_form_submit": "Enter", "admin_link_html": "Are you the store owner? <a href='/admin' target='_blank'>Log in here</a>" },
+    "meta": { "tags": "Tagged", "page": "Page" }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": { "label": "Quantity", "increase": "Increase quantity", "decrease": "Decrease quantity" }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Bag",
+      "empty": "Your bag is empty",
+      "continue_browsing_html": "<a href='/collections/all'>Continue shopping</a>",
+      "item_count": { "one": "{{ count }} item", "other": "{{ count }} items" },
+      "subtotal": "Subtotal",
+      "checkout": "Proceed to Checkout",
+      "shipping_at_checkout": "Shipping & taxes calculated at checkout"
+    }
+  },
+  "collections": {
+    "general": {
+      "items_with_count": { "one": "{{ count }} style", "other": "{{ count }} styles" }
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open navigation",
+    "close_menu": "Close navigation"
+  }
+}

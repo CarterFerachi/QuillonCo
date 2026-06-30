@@ -1,0 +1,13 @@
+{
+  "current": {
+    "color_navy": "#1C2B4A",
+    "color_gold": "#C4973B",
+    "color_cream": "#F5EFE0",
+    "color_green": "#2C5530",
+    "color_text": "#2A2A2A",
+    "heading_font": "playfair",
+    "body_font_size": 16,
+    "cart_type": "drawer"
+  },
+  "presets": {}
+}

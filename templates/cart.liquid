@@ -1,0 +1,95 @@
+<div class="cart-page">
+  <div class="container">
+    <h1 class="cart-page__title">Your Bag</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="/cart" method="post" novalidate class="cart-page__grid">
+
+        <!-- Items -->
+        <div class="cart-page__items">
+          <div class="cart-table-head">
+            <span>Product</span>
+            <span style="text-align:center">Quantity</span>
+            <span style="text-align:right">Total</span>
+          </div>
+
+          {%- for item in cart.items -%}
+            <div class="cart-table-item">
+              <a href="{{ item.url }}">
+                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}"
+                  style="width:100px;height:130px;object-fit:cover;background:var(--color-cream)">
+              </a>
+              <div style="display:flex;flex-direction:column;gap:var(--spacing-2)">
+                <a href="{{ item.url }}" style="font-family:var(--font-heading);font-size:var(--text-md);color:var(--color-navy);font-weight:500">{{ item.product_title }}</a>
+                {%- unless item.variant_title == 'Default Title' -%}
+                  <span style="font-size:var(--text-sm);color:var(--color-mid-gray)">{{ item.variant_title }}</span>
+                {%- endunless -%}
+                <span style="font-size:var(--text-sm);color:var(--color-mid-gray)">{{ item.price | money }} each</span>
+                <div style="display:flex;align-items:center;gap:var(--spacing-4);margin-top:auto">
+                  <div class="cart-item__qty">
+                    <button type="button" onclick="this.closest('.cart-item__qty').querySelector('input').stepDown();this.form.submit()">&#8722;</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:36px;text-align:center;border:none;font-weight:600;font-size:var(--text-sm)">
+                    <button type="button" onclick="this.closest('.cart-item__qty').querySelector('input').stepUp();this.form.submit()">&#43;</button>
+                  </div>
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="font-size:var(--text-xs);color:var(--color-mid-gray);text-decoration:underline">Remove</a>
+                </div>
+              </div>
+              <span style="text-align:right;font-weight:600;font-size:var(--text-md);align-self:flex-start">{{ item.final_line_price | money }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <!-- Summary -->
+        <div class="cart-summary">
+          <h2 class="cart-summary__title">Order Summary</h2>
+          <div class="cart-summary__row">
+            <span>Subtotal ({{ cart.item_count }} items)</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <div class="cart-summary__row">
+            <span>Shipping</span>
+            <span style="color:var(--color-green);font-weight:500">Calculated at checkout</span>
+          </div>
+          <div class="cart-summary__row cart-summary__row--total">
+            <span>Estimated Total</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <div style="margin-bottom:var(--spacing-4)">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="cart-summary__row" style="color:var(--color-green)">
+                  <span>{{ discount.title }}</span>
+                  <span>-{{ discount.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <button type="submit" name="checkout" class="btn btn--primary btn--full btn--lg">
+            Proceed to Checkout
+          </button>
+
+          <div style="text-align:center;margin-top:var(--spacing-4)">
+            <a href="/collections/all" style="font-size:var(--text-sm);color:var(--color-mid-gray);text-decoration:underline">Continue Shopping</a>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:var(--spacing-2);margin-top:var(--spacing-6);color:var(--color-mid-gray);font-size:var(--text-xs)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Secure checkout powered by Shopify
+          </div>
+        </div>
+      </form>
+
+    {%- else -%}
+      <div style="text-align:center;padding:var(--spacing-24) 0">
+        <svg style="margin:0 auto var(--spacing-6);color:var(--color-light-gray)" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <h2 style="font-family:var(--font-heading);font-size:var(--text-2xl);color:var(--color-navy);margin-bottom:var(--spacing-4)">Your bag is empty</h2>
+        <p style="color:var(--color-mid-gray);margin-bottom:var(--spacing-8)">Looks like you haven't added anything yet.</p>
+        <a href="/collections/all" class="btn btn--primary btn--lg">Shop the Collection</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

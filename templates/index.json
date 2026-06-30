@@ -1,0 +1,137 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "New Collection — Summer 2025",
+        "heading": "Dressed for\nthe South",
+        "body": "Collared polo shirts crafted for the gentleman who never compromises — built for the fairway, the field, and the front porch.",
+        "btn_primary_label": "Shop the Collection",
+        "btn_primary_url": "/collections/all",
+        "btn_secondary_label": "Our Story",
+        "btn_secondary_url": "/pages/about",
+        "overlay_opacity": 65
+      }
+    },
+    "values": {
+      "type": "values-strip",
+      "settings": {
+        "title_1": "Free Shipping",
+        "text_1": "On orders over $150",
+        "title_2": "Premium Quality",
+        "text_2": "Crafted to last a lifetime",
+        "title_3": "Easy Returns",
+        "text_3": "30-day guarantee",
+        "title_4": "Made with Pride",
+        "text_4": "Southern craftsmanship in every stitch"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The Collection",
+        "heading": "Refined for Every Occasion",
+        "subheading": "Polo shirts that move with you — from the golf course to the evening social.",
+        "products_to_show": 4,
+        "show_btn": true,
+        "btn_label": "View All Styles",
+        "btn_url": "/collections/all"
+      }
+    },
+    "showcase": {
+      "type": "collection-showcase",
+      "settings": {
+        "eyebrow": "Shop by Style",
+        "heading": "Find Your Fit"
+      },
+      "blocks": {
+        "block1": {
+          "type": "card",
+          "settings": {
+            "label": "Bestseller",
+            "title": "The Heritage Polo",
+            "link": "/collections/heritage"
+          }
+        },
+        "block2": {
+          "type": "card",
+          "settings": {
+            "label": "Performance",
+            "title": "The Active Series",
+            "link": "/collections/active"
+          }
+        },
+        "block3": {
+          "type": "card",
+          "settings": {
+            "label": "Limited Edition",
+            "title": "The Club Collection",
+            "link": "/collections/club"
+          }
+        }
+      },
+      "blocks_order": ["block1", "block2", "block3"]
+    },
+    "story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our Heritage",
+        "heading": "Born on the Back Porch, Built for the Best",
+        "body": "<p>QuillonCo was born from a simple belief: that a man should dress as well on the golf course as he does at the dinner table. Our polo shirts marry the relaxed confidence of southern living with the clean lines of modern sportswear.</p><p>Every shirt is cut from premium pique cotton, finished with signature details, and designed to carry you from the first tee to the last glass with effortless ease.</p>",
+        "btn_label": "Discover Our Story",
+        "btn_url": "/pages/about",
+        "signature": "— The QuillonCo Family",
+        "image_position": "left"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "What They're Saying",
+        "heading": "Worn with Pride",
+        "subheading": "From the fairway to the front porch, QuillonCo gentlemen share their stories."
+      },
+      "blocks": {
+        "t1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "This is the finest polo shirt I've ever owned. The fit is impeccable and the fabric feels like wearing a handshake.",
+            "name": "James Whitfield",
+            "location": "Charleston, SC"
+          }
+        },
+        "t2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "QuillonCo gets southern style right. It's sharp enough for church and comfortable enough for a long day on the course.",
+            "name": "Thomas Beaumont",
+            "location": "Savannah, GA"
+          }
+        },
+        "t3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "I bought three. My wife bought me two more. That should tell you everything you need to know.",
+            "name": "William Hargrove",
+            "location": "Nashville, TN"
+          }
+        }
+      },
+      "blocks_order": ["t1", "t2", "t3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Join the Club",
+        "heading": "The Gentleman's Dispatch",
+        "body": "Subscribe for new arrivals, exclusive member offers, and stories from the South. No spam, ever.",
+        "btn_label": "Subscribe",
+        "privacy_text": "We respect your privacy. Unsubscribe anytime."
+      }
+    }
+  },
+  "order": ["hero", "values", "featured", "showcase", "story", "testimonials", "newsletter"]
+}

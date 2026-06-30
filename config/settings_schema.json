@@ -1,0 +1,67 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "QuillonCo",
+    "theme_version": "1.0.0",
+    "theme_author": "QuillonCo",
+    "theme_documentation_url": "https://quillonco.com",
+    "theme_support_url": "https://quillonco.com/pages/contact"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_navy", "label": "Navy (primary)", "default": "#1C2B4A" },
+      { "type": "color", "id": "color_gold", "label": "Gold (accent)", "default": "#C4973B" },
+      { "type": "color", "id": "color_cream", "label": "Cream (background)", "default": "#F5EFE0" },
+      { "type": "color", "id": "color_green", "label": "Green (success)", "default": "#2C5530" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#2A2A2A" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "heading_font",
+        "label": "Heading font",
+        "options": [
+          { "value": "playfair", "label": "Playfair Display" },
+          { "value": "cormorant", "label": "Cormorant Garamond" },
+          { "value": "libre", "label": "Libre Baskerville" }
+        ],
+        "default": "playfair"
+      },
+      { "type": "range", "id": "body_font_size", "min": 14, "max": 18, "step": 1, "unit": "px", "label": "Body font size", "default": 16 }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon image", "info": "Recommended: 32x32px PNG" }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_twitter", "label": "X / Twitter" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer (recommended)" },
+          { "value": "page", "label": "Cart page" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  }
+]

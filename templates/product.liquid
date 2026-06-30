@@ -1,0 +1,156 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="product-page">
+  <div class="container">
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumbs__sep">/</span>
+      {%- if collection -%}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+        <span class="breadcrumbs__sep">/</span>
+      {%- endif -%}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="product-page__grid">
+
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 900 }}"
+              alt="{{ product.featured_image.alt | default: product.title }}"
+              id="product-main-image"
+              loading="eager"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbnails">
+            {%- for image in product.images limit: 4 -%}
+              <div class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}">
+                <img
+                  src="{{ image | image_url: width: 300 }}"
+                  alt="{{ image.alt | default: product.title }}"
+                  loading="lazy"
+                  width="75"
+                  height="100"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product info -->
+      <div class="product-info">
+        {%- if product.vendor != blank -%}
+          <div class="product-info__vendor">{{ product.vendor }}</div>
+        {%- endif -%}
+
+        <h1 class="product-info__title">{{ product.title }}</h1>
+
+        <div class="product-info__price">
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="compare-at">{{ current_variant.compare_at_price | money }}</span>
+            <span class="sale">{{ current_variant.price | money }}</span>
+          {%- else -%}
+            {{ current_variant.price | money }}
+          {%- endif -%}
+        </div>
+
+        <div class="product-info__rating">
+          <div class="stars">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- endfor -%}
+          </div>
+          <span>4.9 ({{ product.metafields.reviews.rating_count | default: 48 }} reviews)</span>
+        </div>
+
+        <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+          {%- for option in product.options_with_values -%}
+            <div class="product-form__section">
+              <div class="product-form__label">
+                <span>{{ option.name }}</span>
+                {%- if option.name == 'Size' -%}
+                  <a href="/pages/size-guide" class="size-guide-link">Size Guide</a>
+                {%- endif -%}
+              </div>
+
+              {%- if option.name == 'Color' -%}
+                <div class="color-options">
+                  {%- for value in option.values -%}
+                    <div class="color-option{% if option.selected_value == value %} is-selected{% endif %}"
+                      style="background-color: {{ value | downcase }}"
+                      title="{{ value }}"
+                      data-option-value="{{ value }}"
+                    ></div>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <div class="size-options">
+                  {%- for value in option.values -%}
+                    {%- assign variant_available = false -%}
+                    {%- for variant in product.variants -%}
+                      {%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
+                        {%- if variant.available -%}{%- assign variant_available = true -%}{%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <button
+                      type="button"
+                      class="size-option{% if option.selected_value == value %} is-selected{% endif %}{% unless variant_available %} is-unavailable{% endunless %}"
+                      data-option-position="{{ option.position }}"
+                      data-option-value="{{ value }}"
+                    >{{ value }}</button>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+          <div class="product-form__add">
+            <button type="submit" class="btn btn--primary btn--full btn--lg" data-add-to-cart
+              {%- unless current_variant.available %} disabled{%- endunless %}>
+              {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+            </button>
+          </div>
+        </form>
+
+        <div class="product-info__features">
+          <div class="product-feature">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Premium pique cotton blend
+          </div>
+          <div class="product-feature">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Moisture-wicking performance fabric
+          </div>
+          <div class="product-feature">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Machine washable — holds color wash after wash
+          </div>
+          <div class="product-feature">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Free shipping &amp; returns on all orders over $150
+          </div>
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="product-info__description">
+            <h3 class="product-info__description-title">Details</h3>
+            <div class="product-info__description-body">{{ product.description }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
