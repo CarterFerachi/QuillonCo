@@ -1,0 +1,34 @@
+<section class="section-padding">
+  <div class="container" style="max-width:800px;">
+    <h1 style="font-family:var(--font-heading); font-size:2.5rem; margin-bottom:3rem;">Your Cart</h1>
+    {%- if cart.item_count > 0 -%}
+      {%- form 'cart' -%}
+        {%- for item in cart.items -%}
+          <div style="display:flex; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--color-light); align-items:center;">
+            <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title }}" style="width:100px; height:100px; object-fit:cover;">
+            <div style="flex:1;">
+              <div style="font-family:var(--font-heading); font-size:1.125rem; margin-bottom:0.25rem;">{{ item.product.title }}</div>
+              <div style="font-family:var(--font-label); font-size:0.75rem; color:var(--color-gray); margin-bottom:0.5rem;">{{ item.variant.title }}</div>
+              <div style="font-family:var(--font-label); font-weight:700;">{{ item.price | money }}</div>
+            </div>
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px; padding:0.5rem; border:1px solid var(--color-light); text-align:center;">
+          </div>
+        {%- endfor -%}
+        <div style="padding:2rem 0; text-align:right;">
+          <div style="font-family:var(--font-label); font-size:1.125rem; font-weight:700; margin-bottom:1.5rem;">Total: {{ cart.total_price | money }}</div>
+          <button type="submit" name="checkout" class="btn btn--volt btn--lg">Checkout</button>
+        </div>
+      {%- endform -%}
+    {%- else -%}
+      <p style="color:var(--color-gray); margin-bottom:2rem;">Your cart is empty.</p>
+      <a href="/collections/all" class="btn btn--primary">Continue Shopping</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "settings": []
+}
+{% endschema %}

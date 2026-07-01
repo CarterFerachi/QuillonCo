@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "New Drop — Summer 2025",
+        "heading": "Built to Move. Built to Last.",
+        "subheading": "Performance collar shirts engineered for the athlete who refuses to choose between style and function.",
+        "button_label": "Shop the Collection",
+        "button_url": "/collections/all",
+        "button2_label": "Our Story",
+        "button2_url": "/pages/about",
+        "overlay_opacity": 65
+      }
+    },
+    "values": {
+      "type": "values-strip",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The Collection",
+        "heading": "Performance Series",
+        "subheading": "Each shirt is precision-cut for the athlete who demands more."
+      }
+    },
+    "showcase": {
+      "type": "collection-showcase",
+      "settings": {}
+    },
+    "story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our Standard",
+        "heading": "The QuillonCo Standard",
+        "body": "Engineered in the South. Built for Everywhere. Every QuillonCo shirt starts with a question: what does the modern athlete actually need? The answer is fabric that breathes, a collar that holds its shape, and construction that moves with your body.",
+        "button_label": "Our Story",
+        "button_url": "/pages/about"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "First to the Drop",
+        "body": "Get early access to new collections, training content, and exclusive offers — straight to your inbox."
+      }
+    }
+  },
+  "order": ["hero", "values", "featured", "showcase", "story", "testimonials", "newsletter"]
+}

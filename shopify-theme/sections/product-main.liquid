@@ -1,0 +1,38 @@
+<section class="section-padding">
+  <div class="container">
+    <div class="product-main__grid">
+      <div class="product-main__media">
+        {%- if product.featured_image != blank -%}
+          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" style="width:100%; height:auto;">
+        {%- endif -%}
+      </div>
+      <div class="product-main__info">
+        <span class="eyebrow">{{ product.vendor }}</span>
+        <h1 style="font-family:var(--font-heading); font-size:2.5rem; margin-bottom:1rem;">{{ product.title }}</h1>
+        <p style="font-family:var(--font-label); font-size:1.25rem; font-weight:700; margin-bottom:1.5rem;">{{ product.price | money }}</p>
+        <div style="margin-bottom:2rem; color:var(--color-gray); line-height:1.8;">{{ product.description }}</div>
+        {%- form 'product', product -%}
+          {%- if product.variants.size > 1 -%}
+            <select name="id" style="width:100%; padding:0.75rem 1rem; border:2px solid var(--color-light); margin-bottom:1rem; font-family:var(--font-body); background:white;">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title }} - {{ variant.price | money }}</option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          {%- endif -%}
+          <button type="submit" class="btn btn--volt btn--full btn--lg" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": []
+}
+{% endschema %}

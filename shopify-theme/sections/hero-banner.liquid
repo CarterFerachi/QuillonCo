@@ -1,0 +1,52 @@
+<section class="hero">
+  <div class="hero__media">
+    {%- if section.settings.image != blank -%}
+      <img class="hero__image" src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+    {%- else -%}
+      <img class="hero__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="QuillonCo performance collar shirt" loading="eager">
+    {%- endif -%}
+    <div class="hero__overlay" style="--overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+  </div>
+  <div class="container">
+    <div class="hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow eyebrow--volt hero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="hero__heading">{{ section.settings.heading | newline_to_br }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero__body">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_url }}" class="btn btn--volt btn--lg">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a href="{{ section.settings.button2_url }}" class="btn btn--outline-white btn--lg">{{ section.settings.button2_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scroll
+  </div>
+</section>
+<div class="volt-bar"></div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background Image" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay Opacity", "default": 65 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Drop — Summer 2025" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Built to Move.\nBuilt to Last." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Performance collar shirts engineered for the athlete who refuses to choose between style and function." },
+    { "type": "text", "id": "button_label", "label": "Button 1 Label", "default": "Shop the Collection" },
+    { "type": "url", "id": "button_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "button2_label", "label": "Button 2 Label", "default": "Our Story" },
+    { "type": "url", "id": "button2_url", "label": "Button 2 URL" }
+  ],
+  "presets": [{ "name": "Hero Banner" }]
+}
+{% endschema %}
