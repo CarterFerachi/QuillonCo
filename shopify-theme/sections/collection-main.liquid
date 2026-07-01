@@ -1,0 +1,32 @@
+<section class="section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h1>{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p>{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        <div class="product-card">
+          <a href="{{ product.url }}" class="product-card__media">
+            {%- if product.featured_image != blank -%}
+              <img class="product-card__image" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy">
+            {%- endif -%}
+            <div class="product-card__quick-add">+ View Product</div>
+          </a>
+          <div class="product-card__vendor">{{ product.vendor }}</div>
+          <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+          <div class="product-card__price">{{ product.price | money }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "settings": []
+}
+{% endschema %}
