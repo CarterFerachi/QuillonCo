@@ -3,14 +3,14 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "New Collection — Summer 2025",
-        "heading": "Dressed for\nthe South",
-        "body": "Collared polo shirts crafted for the gentleman who never compromises — built for the fairway, the field, and the front porch.",
-        "btn_primary_label": "Shop the Collection",
+        "eyebrow": "New Drop — Summer 2025",
+        "heading": "Built to\nMove. Built\nto Last.",
+        "body": "Performance collar shirts engineered for the athlete who refuses to choose between style and function.",
+        "btn_primary_label": "Shop Now",
         "btn_primary_url": "/collections/all",
         "btn_secondary_label": "Our Story",
         "btn_secondary_url": "/pages/about",
-        "overlay_opacity": 65
+        "overlay_opacity": 75
       }
     },
     "values": {
@@ -18,20 +18,20 @@
       "settings": {
         "title_1": "Free Shipping",
         "text_1": "On orders over $150",
-        "title_2": "Premium Quality",
-        "text_2": "Crafted to last a lifetime",
-        "title_3": "Easy Returns",
-        "text_3": "30-day guarantee",
-        "title_4": "Made with Pride",
-        "text_4": "Southern craftsmanship in every stitch"
+        "title_2": "4-Way Stretch",
+        "text_2": "Moves with every rep",
+        "title_3": "Anti-Odor Tech",
+        "text_3": "All day. Every day.",
+        "title_4": "Easy Returns",
+        "text_4": "30-day guarantee"
       }
     },
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "The Collection",
-        "heading": "Refined for Every Occasion",
-        "subheading": "Polo shirts that move with you — from the golf course to the evening social.",
+        "eyebrow": "The Drop",
+        "heading": "Perform Without Compromise",
+        "subheading": "Collar shirts built for athletes. Styled for everywhere else.",
         "products_to_show": 4,
         "show_btn": true,
         "btn_label": "View All Styles",
@@ -41,93 +41,48 @@
     "showcase": {
       "type": "collection-showcase",
       "settings": {
-        "eyebrow": "Shop by Style",
-        "heading": "Find Your Fit"
+        "eyebrow": "Shop by Series",
+        "heading": "Find Your Edge"
       },
       "blocks": {
-        "block1": {
-          "type": "card",
-          "settings": {
-            "label": "Bestseller",
-            "title": "The Heritage Polo",
-            "link": "/collections/heritage"
-          }
-        },
-        "block2": {
-          "type": "card",
-          "settings": {
-            "label": "Performance",
-            "title": "The Active Series",
-            "link": "/collections/active"
-          }
-        },
-        "block3": {
-          "type": "card",
-          "settings": {
-            "label": "Limited Edition",
-            "title": "The Club Collection",
-            "link": "/collections/club"
-          }
-        }
+        "block1": { "type": "card", "settings": { "label": "Signature", "title": "The Performance Series", "link": "/collections/performance" }},
+        "block2": { "type": "card", "settings": { "label": "Training", "title": "The Training Collar", "link": "/collections/training" }},
+        "block3": { "type": "card", "settings": { "label": "Limited", "title": "The Field Edition", "link": "/collections/field" }}
       },
       "blocks_order": ["block1", "block2", "block3"]
     },
     "story": {
       "type": "brand-story",
       "settings": {
-        "eyebrow": "Our Heritage",
-        "heading": "Born on the Back Porch, Built for the Best",
-        "body": "<p>QuillonCo was born from a simple belief: that a man should dress as well on the golf course as he does at the dinner table. Our polo shirts marry the relaxed confidence of southern living with the clean lines of modern sportswear.</p><p>Every shirt is cut from premium pique cotton, finished with signature details, and designed to carry you from the first tee to the last glass with effortless ease.</p>",
-        "btn_label": "Discover Our Story",
+        "eyebrow": "The QuillonCo Standard",
+        "heading": "Engineered in the South. Built for Everywhere.",
+        "body": "<p>QuillonCo was built on one idea: that athletic performance and sharp style should never be a trade-off. Our collar shirts are precision-engineered with performance fabrics — moisture-wicking, four-way stretch, anti-odor — designed to perform as hard as you do.</p><p>Southern roots. Global standards. No compromises.</p>",
+        "btn_label": "Our Story",
         "btn_url": "/pages/about",
-        "signature": "— The QuillonCo Family",
+        "signature": "— QuillonCo",
         "image_position": "left"
       }
     },
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "eyebrow": "What They're Saying",
-        "heading": "Worn with Pride",
-        "subheading": "From the fairway to the front porch, QuillonCo gentlemen share their stories."
+        "eyebrow": "Real Athletes. Real Results.",
+        "heading": "Worn by the Best",
+        "subheading": "From the weight room to the weekend, QuillonCo athletes speak for themselves."
       },
       "blocks": {
-        "t1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "This is the finest polo shirt I've ever owned. The fit is impeccable and the fabric feels like wearing a handshake.",
-            "name": "James Whitfield",
-            "location": "Charleston, SC"
-          }
-        },
-        "t2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "QuillonCo gets southern style right. It's sharp enough for church and comfortable enough for a long day on the course.",
-            "name": "Thomas Beaumont",
-            "location": "Savannah, GA"
-          }
-        },
-        "t3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "I bought three. My wife bought me two more. That should tell you everything you need to know.",
-            "name": "William Hargrove",
-            "location": "Nashville, TN"
-          }
-        }
+        "t1": { "type": "review", "settings": { "rating": 5, "quote": "Finally a collar shirt that keeps up with me. Wore it through a full workout and straight to dinner. Nobody knew the difference.", "name": "Marcus Webb", "location": "Atlanta, GA" }},
+        "t2": { "type": "review", "settings": { "rating": 5, "quote": "The fabric technology is unreal. No sweat marks, no restriction. This is what athletic wear should be.", "name": "Darius Cole", "location": "Houston, TX" }},
+        "t3": { "type": "review", "settings": { "rating": 5, "quote": "I’ve tried everything. QuillonCo is the only collar shirt built for someone who actually moves.", "name": "Tyler Fontenot", "location": "New Orleans, LA" }}
       },
       "blocks_order": ["t1", "t2", "t3"]
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "Join the Club",
-        "heading": "The Gentleman's Dispatch",
-        "body": "Subscribe for new arrivals, exclusive member offers, and stories from the South. No spam, ever.",
+        "eyebrow": "Stay In The Game",
+        "heading": "First to the Drop",
+        "body": "Get early access to new releases, exclusive drops, and training content. No spam, just signal.",
         "btn_label": "Subscribe",
         "privacy_text": "We respect your privacy. Unsubscribe anytime."
       }

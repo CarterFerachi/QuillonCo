@@ -1,60 +1,22 @@
 <section class="testimonials">
   <div class="container">
-    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:var(--spacing-3);color:var(--color-gold)">{{ section.settings.eyebrow }}</span>
+    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:var(--spacing-3)">{{ section.settings.eyebrow }}</span>
     <h2 class="testimonials__heading heading-lg">{{ section.settings.heading }}</h2>
     <p class="testimonials__sub">{{ section.settings.subheading }}</p>
-
     <div class="testimonials__grid">
       {%- for block in section.blocks -%}
         <div class="testimonial-card" {{ block.shopify_attributes }}>
-          <div class="testimonial-card__stars">
-            {%- for i in (1..block.settings.rating) -%}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            {%- endfor -%}
-          </div>
+          <div class="testimonial-card__stars">{%- for i in (1..block.settings.rating) -%}<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{%- endfor -%}</div>
           <blockquote class="testimonial-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</blockquote>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">{{ block.settings.name | slice: 0 }}</div>
-            <div>
-              <div class="testimonial-card__name">{{ block.settings.name }}</div>
-              <div class="testimonial-card__location">{{ block.settings.location }}</div>
-            </div>
+            <div><div class="testimonial-card__name">{{ block.settings.name }}</div><div class="testimonial-card__location">{{ block.settings.location }}</div></div>
           </div>
         </div>
       {%- endfor -%}
     </div>
   </div>
 </section>
-
 {% schema %}
-{
-  "name": "Testimonials",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What They're Saying" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Worn with Pride" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "From the fairway to the front porch, QuillonCo gentlemen share their stories." }
-  ],
-  "blocks": [
-    {
-      "type": "review",
-      "name": "Review",
-      "settings": [
-        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Rating", "default": 5 },
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "This is the finest polo shirt I've ever owned. The fit is impeccable and the fabric feels like wearing a handshake." },
-        { "type": "text", "id": "name", "label": "Name", "default": "James Whitfield" },
-        { "type": "text", "id": "location", "label": "Location", "default": "Charleston, SC" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Testimonials",
-      "blocks": [
-        { "type": "review", "settings": { "quote": "This is the finest polo shirt I've ever owned. The fit is impeccable and the fabric feels like wearing a handshake.", "name": "James Whitfield", "location": "Charleston, SC" }},
-        { "type": "review", "settings": { "quote": "QuillonCo gets southern style right. It's sharp enough for church and comfortable enough for a long day on the course.", "name": "Thomas Beaumont", "location": "Savannah, GA" }},
-        { "type": "review", "settings": { "quote": "I bought three. My wife bought me two more. That should tell you everything you need to know.", "name": "William Hargrove", "location": "Nashville, TN" }}
-      ]
-    }
-  ]
-}
+{"name":"Testimonials","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Real Athletes. Real Results."},{"type":"text","id":"heading","label":"Heading","default":"Worn by the Best"},{"type":"text","id":"subheading","label":"Subheading","default":"From the weight room to the weekend, QuillonCo athletes speak for themselves."}],"blocks":[{"type":"review","name":"Review","settings":[{"type":"range","id":"rating","min":1,"max":5,"step":1,"label":"Rating","default":5},{"type":"textarea","id":"quote","label":"Quote","default":"Finally a collar shirt that keeps up with me. Wore it through a full workout and straight to dinner. Nobody knew the difference."},{"type":"text","id":"name","label":"Name","default":"Marcus Webb"},{"type":"text","id":"location","label":"Location","default":"Atlanta, GA"}]}],"presets":[{"name":"Testimonials","blocks":[{"type":"review","settings":{"quote":"Finally a collar shirt that keeps up with me. Wore it through a full workout and straight to dinner. Nobody knew the difference.","name":"Marcus Webb","location":"Atlanta, GA"}},{"type":"review","settings":{"quote":"The fabric technology is unreal. No sweat marks, no restriction. This is what athletic wear should be.","name":"Darius Cole","location":"Houston, TX"}},{"type":"review","settings":{"quote":"I’ve tried everything. QuillonCo is the only collar shirt built for someone who actually moves.","name":"Tyler Fontenot","location":"New Orleans, LA"}}]}]}
 {% endschema %}

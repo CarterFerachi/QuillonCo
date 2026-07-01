@@ -2,80 +2,39 @@
   .hero--{{ section.id }} .hero__overlay {
     background: linear-gradient(
       to right,
-      rgba({{ section.settings.overlay_color | color_extract: 'red' }}, {{ section.settings.overlay_color | color_extract: 'green' }}, {{ section.settings.overlay_color | color_extract: 'blue' }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 0%,
-      rgba({{ section.settings.overlay_color | color_extract: 'red' }}, {{ section.settings.overlay_color | color_extract: 'green' }}, {{ section.settings.overlay_color | color_extract: 'blue' }}, {{ section.settings.overlay_opacity | times: 0.5 | divided_by: 100.0 }}) 55%,
-      rgba({{ section.settings.overlay_color | color_extract: 'red' }}, {{ section.settings.overlay_color | color_extract: 'green' }}, {{ section.settings.overlay_color | color_extract: 'blue' }}, 0.05) 100%
+      rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}) 0%,
+      rgba(0,0,0,{{ section.settings.overlay_opacity | times: 0.55 | divided_by: 100.0 }}) 50%,
+      rgba(0,0,0,0.05) 100%
     );
   }
 </style>
 
-<section class="hero hero--{{ section.id }}{% if section.settings.image == blank %} hero--placeholder{% endif %}" aria-label="Hero banner">
+<section class="hero hero--{{ section.id }}" aria-label="Hero banner">
   <div class="hero__media">
     {%- if section.settings.image != blank -%}
-      <img
-        src="{{ section.settings.image | image_url: width: 2000 }}"
-        srcset="{{ section.settings.image | image_url: width: 800 }} 800w,
-                {{ section.settings.image | image_url: width: 1200 }} 1200w,
-                {{ section.settings.image | image_url: width: 1800 }} 1800w,
-                {{ section.settings.image | image_url: width: 2200 }} 2200w"
-        sizes="100vw"
-        alt="{{ section.settings.image.alt | default: shop.name }}"
-        class="hero__image"
-        loading="eager"
-        fetchpriority="high"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-      >
+      <img src="{{ section.settings.image | image_url: width: 2200 }}"
+        srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1800 }} 1800w, {{ section.settings.image | image_url: width: 2200 }} 2200w"
+        sizes="100vw" alt="{{ section.settings.image.alt | default: shop.name }}"
+        class="hero__image" loading="eager" fetchpriority="high">
     {%- endif -%}
     <div class="hero__overlay"></div>
   </div>
-
-  <div class="container hero__container">
+  <div class="container">
     <div class="hero__content">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow }}</p>
-      {%- endif -%}
-
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h1 class="hero__heading">{{ section.settings.heading }}</h1>
-
-      {%- if section.settings.body != blank -%}
-        <p class="hero__body">{{ section.settings.body }}</p>
-      {%- endif -%}
-
+      {%- if section.settings.body != blank -%}<p class="hero__body">{{ section.settings.body }}</p>{%- endif -%}
       <div class="hero__actions">
-        {%- if section.settings.btn_primary_label != blank -%}
-          <a href="{{ section.settings.btn_primary_url }}" class="btn btn--gold btn--lg">{{ section.settings.btn_primary_label }}</a>
-        {%- endif -%}
-        {%- if section.settings.btn_secondary_label != blank -%}
-          <a href="{{ section.settings.btn_secondary_url }}" class="btn btn--outline-white btn--lg">{{ section.settings.btn_secondary_label }}</a>
-        {%- endif -%}
+        {%- if section.settings.btn_primary_label != blank -%}<a href="{{ section.settings.btn_primary_url }}" class="btn btn--volt btn--lg">{{ section.settings.btn_primary_label }}</a>{%- endif -%}
+        {%- if section.settings.btn_secondary_label != blank -%}<a href="{{ section.settings.btn_secondary_url }}" class="btn btn--outline-white btn--lg">{{ section.settings.btn_secondary_label }}</a>{%- endif -%}
       </div>
     </div>
   </div>
-
   <div class="hero__scroll" aria-hidden="true">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
 {% schema %}
-{
-  "name": "Hero Banner",
-  "tag": "div",
-  "settings": [
-    { "type": "image_picker", "id": "image", "label": "Hero image" },
-    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#1C2B4A" },
-    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 65 },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "New Collection — Summer 2025" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Dressed for\nthe South" },
-    { "type": "textarea", "id": "body", "label": "Subheading", "default": "Collared polo shirts crafted for the gentleman who never compromises — built for the fairway, the field, and the front porch." },
-    { "type": "text", "id": "btn_primary_label", "label": "Primary button label", "default": "Shop the Collection" },
-    { "type": "url", "id": "btn_primary_url", "label": "Primary button link", "default": "/collections/all" },
-    { "type": "text", "id": "btn_secondary_label", "label": "Secondary button label", "default": "Our Story" },
-    { "type": "url", "id": "btn_secondary_url", "label": "Secondary button link", "default": "/pages/about" }
-  ],
-  "presets": [{ "name": "Hero Banner", "category": "Hero" }]
-}
+{"name":"Hero Banner","tag":"div","settings":[{"type":"image_picker","id":"image","label":"Hero image"},{"type":"range","id":"overlay_opacity","min":0,"max":100,"step":5,"unit":"%","label":"Overlay opacity","default":75},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"New Drop — Summer 2025"},{"type":"textarea","id":"heading","label":"Heading","default":"Built to\nMove. Built\nto Last."},{"type":"textarea","id":"body","label":"Subheading","default":"Performance collar shirts engineered for the athlete who refuses to choose between style and function."},{"type":"text","id":"btn_primary_label","label":"Primary button","default":"Shop Now"},{"type":"url","id":"btn_primary_url","default":"/collections/all"},{"type":"text","id":"btn_secondary_label","label":"Secondary button","default":"Our Story"},{"type":"url","id":"btn_secondary_url","default":"/pages/about"}],"presets":[{"name":"Hero Banner"}]}
 {% endschema %}
