@@ -1,0 +1,24 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "QuillonCo",
+    "theme_version": "1.0.0",
+    "theme_author": "QuillonCo",
+    "theme_documentation_url": "https://quillonco.com",
+    "theme_support_url": "https://quillonco.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Primary (Volt Green)", "default": "#C8FF00" },
+      { "type": "color", "id": "color_black", "label": "Black", "default": "#0C0C0C" },
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#F0F0F0" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon image" }
+    ]
+  }
+]
