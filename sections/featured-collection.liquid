@@ -1,0 +1,57 @@
+{%- assign collection = collections[section.settings.collection] -%}
+<section class="section-padding" style="background: var(--color-bg);">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+    <div class="product-grid">
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: 4 -%}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card__media">
+              {%- if product.featured_image != blank -%}
+                <img class="product-card__image" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy">
+              {%- endif -%}
+              {%- if product.available == false -%}
+                <span class="product-card__badge">Sold Out</span>
+              {%- elsif product.compare_at_price > product.price -%}
+                <span class="product-card__badge">Sale</span>
+              {%- endif -%}
+              <div class="product-card__quick-add">+ Quick Add</div>
+            </a>
+            <div class="product-card__vendor">{{ product.vendor }}</div>
+            <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+            <div class="product-card__price">{{ product.price | money }}</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="product-card"><div class="product-card__media"><img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233900_c864c65c-63c1-4418-b34e-d804ae2b502a.png" alt="Performance Collar Shirt" loading="lazy"><span class="product-card__badge">New</span><div class="product-card__quick-add">+ Quick Add</div></div><div class="product-card__vendor">QuillonCo</div><div class="product-card__title">The Performance Collar</div><div class="product-card__price">$88.00</div></div>
+        <div class="product-card"><div class="product-card__media"><img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233909_d46895f2-77e1-4a47-baa4-b4bc98a062af.png" alt="Training Collar Shirt" loading="lazy"><div class="product-card__quick-add">+ Quick Add</div></div><div class="product-card__vendor">QuillonCo</div><div class="product-card__title">The Training Collar</div><div class="product-card__price">$92.00</div></div>
+        <div class="product-card"><div class="product-card__media"><img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Field Edition" loading="lazy"><span class="product-card__badge">Bestseller</span><div class="product-card__quick-add">+ Quick Add</div></div><div class="product-card__vendor">QuillonCo</div><div class="product-card__title">Field Edition</div><div class="product-card__price">$96.00</div></div>
+        <div class="product-card"><div class="product-card__media"><img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234027_f8f9f7c5-8020-43f8-99f4-a31b75536873.png" alt="Collar Detail Edition" loading="lazy"><div class="product-card__quick-add">+ Quick Add</div></div><div class="product-card__vendor">QuillonCo</div><div class="product-card__title">Collar Detail Edition</div><div class="product-card__price">$84.00</div></div>
+      {%- endif -%}
+    </div>
+    <div style="text-align:center; margin-top: 3rem;">
+      <a href="/collections/all" class="btn btn--secondary btn--lg">View All Products</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Performance Series" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Each shirt is precision-cut for the athlete who demands more." }
+  ],
+  "presets": [{ "name": "Featured Collection" }]
+}
+{% endschema %}
