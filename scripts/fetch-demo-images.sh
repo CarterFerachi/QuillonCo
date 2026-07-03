@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Downloads the Higgsfield-generated QuillonCo campaign imagery into
-# shopify-theme/assets/ so the theme can ship the images as local assets
+# assets/ so the theme can ship the images as local assets
 # instead of hotlinking the Higgsfield CDN.
 #
 # After running, update snippets/demo-image.liquid to use
@@ -8,7 +8,7 @@
 set -euo pipefail
 
 CDN="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V"
-DEST="$(cd "$(dirname "$0")/.." && pwd)/shopify-theme/assets"
+DEST="$(cd "$(dirname "$0")/.." && pwd)/assets"
 
 declare -A IMAGES=(
   [q-hero]="hf_20260702_233529_381f4b7d-6700-47b3-bdb7-889de6481f74"
