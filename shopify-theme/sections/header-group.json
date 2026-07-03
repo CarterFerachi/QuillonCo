@@ -1,0 +1,29 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement": {
+          "type": "announcement",
+          "settings": {
+            "text": "Complimentary shipping on orders over $150",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["announcement"]
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "sticky_header": true,
+        "show_wishlist": true,
+        "mega_menu_heading": "The Performance Polo"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

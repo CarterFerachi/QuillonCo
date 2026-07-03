@@ -1,4 +1,9 @@
 {
-  "sections": { "main": { "type": "404-main", "settings": {} } },
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {}
+    }
+  },
   "order": ["main"]
 }

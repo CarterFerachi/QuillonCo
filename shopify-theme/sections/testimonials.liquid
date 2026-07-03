@@ -1,33 +1,33 @@
-<section class="testimonials">
-  <div class="container">
-    <span class="eyebrow eyebrow--volt testimonials__eyebrow">Real Athletes. Real Results.</span>
-    <h2 class="testimonials__heading">Worn by the Best</h2>
-    <p class="testimonials__sub">From the gym to the field &mdash; hear it from the people who actually wear us.</p>
-    <div class="testimonials__grid">
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-card__quote">&ldquo;I wore this on the court, at dinner, and back to the gym the next morning. Held up every time. The collar stays crisp no matter what you put it through.&rdquo;</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">M</div>
-          <div><div class="testimonial-card__name">Marcus Webb</div><div class="testimonial-card__location">Atlanta, GA</div></div>
-        </div>
+<section class="section section--surface">
+  <div class="page-width">
+    <div class="section-header section-header--center">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow eyebrow--accent scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
       </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-card__quote">&ldquo;Finally a shirt that moves with me during training and still looks sharp enough to walk into a meeting afterward. The stretch is unreal &mdash; zero restriction.&rdquo;</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">D</div>
-          <div><div class="testimonial-card__name">Darius Cole</div><div class="testimonial-card__location">Houston, TX</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-card__quote">&ldquo;These shirts have ruined every other brand for me. The anti-odor tech is not a gimmick &mdash; I&rsquo;ve tested it. QuillonCo is the only collar shirt I&rsquo;ll touch now.&rdquo;</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">T</div>
-          <div><div class="testimonial-card__name">Tyler Fontenot</div><div class="testimonial-card__location">New Orleans, LA</div></div>
-        </div>
-      </div>
+    </div>
+
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        <blockquote class="testimonial-card scroll-trigger" data-cascade="{{ forloop.index | at_most: 6 }}" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+            {%- for i in (1..5) -%}
+              {%- if i <= block.settings.rating -%}
+                {% render 'icon', icon: 'star' %}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <p class="testimonial-card__quote">&ldquo;{{ block.settings.quote | escape }}&rdquo;</p>
+          <footer class="testimonial-card__author">
+            <p class="testimonial-card__name">{{ block.settings.author | escape }}</p>
+            {%- if block.settings.meta != blank -%}
+              <p class="testimonial-card__meta">{{ block.settings.meta | escape }}</p>
+            {%- endif -%}
+          </footer>
+        </blockquote>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -35,7 +35,86 @@
 {% schema %}
 {
   "name": "Testimonials",
-  "settings": [],
-  "presets": [{ "name": "Testimonials" }]
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Word Is Out"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Worn With Confidence"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The only polo I've owned that looks as sharp at a client dinner as it does on the first tee. I bought three more the same week."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Michael R."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Detail",
+          "default": "Verified Buyer — The Fairway Polo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The only polo I've owned that looks as sharp at a client dinner as it does on the first tee. I bought three more the same week.",
+            "author": "Michael R.",
+            "meta": "Verified Buyer — The Fairway Polo"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Wore it through a cross-country flight, straight into a board meeting. Zero wrinkles, zero complaints. This fabric is unreal.",
+            "author": "David T.",
+            "meta": "Verified Buyer — The Traveler Polo"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally — a performance polo with a collar that doesn't curl. The fit is tailored without being tight. Worth every dollar.",
+            "author": "James K.",
+            "meta": "Verified Buyer — The Club Polo"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

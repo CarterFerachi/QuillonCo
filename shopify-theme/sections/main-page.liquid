@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="page-width page-width--narrow">
+    <header class="page-header">
+      <h1 class="h1">{{ page.title | escape }}</h1>
+    </header>
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": []
+}
+{% endschema %}

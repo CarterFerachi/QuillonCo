@@ -1,29 +1,49 @@
-<section class="brand-story">
-  <div class="brand-story__grid container--wide" style="max-width: 1440px; margin: 0 auto;">
-    <div class="brand-story__media">
-      {%- if section.settings.image != blank -%}
-        <img class="brand-story__image" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
-      {%- else -%}
-        <img class="brand-story__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233809_257d39fb-75c5-4724-bccf-f1d588241b5b.png" alt="The QuillonCo Standard" loading="lazy">
-      {%- endif -%}
-    </div>
-    <div class="brand-story__content">
-      <div class="brand-story__inner">
-        {%- if section.settings.eyebrow != blank -%}
-          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
-        {%- endif -%}
-        <h2 class="brand-story__heading">{{ section.settings.heading }}</h2>
-        {%- if section.settings.body != blank -%}
-          <p class="brand-story__body">{{ section.settings.body }}</p>
-        {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_url }}" class="btn btn--primary">{{ section.settings.button_label }}</a>
-        {%- endif -%}
-        <div class="brand-story__stats">
-          <div class="stat-item"><div class="stat-item__number">4<em>&times;</em></div><div class="stat-item__label">Stretch All Directions</div></div>
-          <div class="stat-item"><div class="stat-item__number">48<em>h</em></div><div class="stat-item__label">Anti-Odor Protection</div></div>
-          <div class="stat-item"><div class="stat-item__number">100<em>%</em></div><div class="stat-item__label">Satisfaction Guaranteed</div></div>
+<section class="section">
+  <div class="page-width">
+    <div class="image-with-text__grid{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}">
+      <div class="image-with-text__media media-zoom-hover scroll-trigger">
+        <div class="media">
+          {%- if section.settings.image != blank -%}
+            <img
+              srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                {{ section.settings.image | image_url: width: 900 }} 900w,
+                {{ section.settings.image | image_url: width: 1200 }} 1200w"
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              sizes="(min-width: 990px) 50vw, 100vw"
+              alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+            >
+          {%- else -%}
+            {% render 'demo-image', name: 'story', alt: section.settings.heading %}
+          {%- endif -%}
         </div>
+      </div>
+
+      <div class="image-with-text__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow eyebrow--accent scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
+        <div class="lead scroll-trigger" data-cascade="2">{{ section.settings.text }}</div>
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="image-with-text__stats scroll-trigger" data-cascade="3">
+            {%- for block in section.blocks -%}
+              <div class="stat" {{ block.shopify_attributes }}>
+                <p class="stat__value">{{ block.settings.value | escape }}</p>
+                <p class="stat__label">{{ block.settings.label | escape }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--secondary scroll-trigger" data-cascade="4">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -31,15 +51,83 @@
 
 {% schema %}
 {
-  "name": "Brand Story",
+  "name": "Brand story",
+  "max_blocks": 3,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Standard" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The QuillonCo Standard" },
-    { "type": "textarea", "id": "body", "label": "Body Text", "default": "Engineered in the South. Built for Everywhere." },
-    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Our Story" },
-    { "type": "url", "id": "button_url", "label": "Button URL" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image_first", "label": "Image first" },
+        { "value": "text_first", "label": "Text first" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The QuillonCo Standard"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Obsessed With the Details You Feel"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>QuillonCo was founded on a simple belief: the shirt you wear should work as hard as you do. Every polo begins with technical fabric engineered for movement, then passes through a construction process measured in millimeters — precise collars that keep their shape, seams that never chafe, and a tailored fit that moves from first tee to final meeting without missing a beat.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
   ],
-  "presets": [{ "name": "Brand Story" }]
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "4-Way"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Stretch fabric"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand story",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "4-Way", "label": "Stretch fabric" } },
+        { "type": "stat", "settings": { "value": "UPF 50", "label": "Sun protection" } },
+        { "type": "stat", "settings": { "value": "60+", "label": "Fit iterations" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

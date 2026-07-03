@@ -1,0 +1,58 @@
+{%- comment -%}
+  Renders a bundled QuillonCo campaign image (generated with Higgsfield).
+  These are demo placeholders shown until a merchant picks their own image
+  in the Theme Editor. Run scripts/fetch-demo-images.sh to vendor the files
+  into assets/ and swap the URLs below for {{ 'q-<name>.png' | asset_url }}.
+
+  Accepts:
+  - name: {String} hero | hero-2 | story | product-navy | product-green |
+          product-white | life-club | life-office | life-tennis |
+          life-travel | life-dinner
+  - alt: {String}
+  - loading: {String} 'lazy' (default) or 'eager'
+{%- endcomment -%}
+{%- liquid
+  assign cdn = 'https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V'
+  assign width = 1536
+  assign height = 2048
+  case name
+    when 'hero'
+      assign file = 'hf_20260702_233529_381f4b7d-6700-47b3-bdb7-889de6481f74'
+      assign width = 2048
+      assign height = 1152
+    when 'hero-2'
+      assign file = 'hf_20260702_233614_39afa232-98e2-4755-b963-b93ba28b9f76'
+      assign width = 2048
+      assign height = 1152
+    when 'story'
+      assign file = 'hf_20260702_233544_8d381104-77dd-45e1-b034-1d12513e1e18'
+      assign width = 2016
+      assign height = 1344
+    when 'product-navy'
+      assign file = 'hf_20260702_233539_d7002d85-30b8-41ef-93a8-97400d74aeec'
+    when 'product-green'
+      assign file = 'hf_20260702_233540_e490e605-9ce0-4d23-bc29-77033a291e7a'
+    when 'product-white'
+      assign file = 'hf_20260702_233542_ec3205d6-430b-4045-b264-f6609f16e370'
+    when 'life-club'
+      assign file = 'hf_20260702_233554_0d8b4097-e6db-426a-bb1f-035b9b2d4b2d'
+    when 'life-office'
+      assign file = 'hf_20260702_233555_bea96c5d-4b71-4d5f-8630-fd8846b54577'
+    when 'life-tennis'
+      assign file = 'hf_20260702_233557_1ab33fcd-e013-47e8-be6e-dd28125ff1c9'
+    when 'life-travel'
+      assign file = 'hf_20260702_233559_3e350de4-902b-4951-a03f-83773f007208'
+    when 'life-dinner'
+      assign file = 'hf_20260702_233612_49d275a0-5297-4a63-bee9-3dc5a2cf8524'
+  endcase
+  assign img_loading = loading | default: 'lazy'
+-%}
+{%- if file -%}
+  <img
+    src="{{ cdn }}/{{ file }}_min.webp"
+    alt="{{ alt | escape }}"
+    {% if img_loading == 'eager' %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+    width="{{ width }}"
+    height="{{ height }}"
+  >
+{%- endif -%}

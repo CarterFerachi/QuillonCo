@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="page-width">
+    <header class="page-header">
+      <h1 class="h1">{{ blog.title | escape }}</h1>
+    </header>
+    {%- paginate blog.articles by 9 -%}
+      <div class="blog-grid">
+        {%- for article in blog.articles -%}
+          <article class="article-card scroll-trigger" data-cascade="{{ forloop.index | modulo: 3 | plus: 1 }}">
+            <a href="{{ article.url }}">
+              <div class="article-card__media media-zoom-hover">
+                <div class="media">
+                  {%- if article.image -%}
+                    <img
+                      srcset="{{ article.image | image_url: width: 480 }} 480w, {{ article.image | image_url: width: 720 }} 720w"
+                      src="{{ article.image | image_url: width: 720 }}"
+                      sizes="(min-width: 750px) 33vw, 100vw"
+                      alt="{{ article.image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ article.image.width }}"
+                      height="{{ article.image.height }}"
+                    >
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+              </div>
+              <h2 class="article-card__title h4">{{ article.title | escape }}</h2>
+            </a>
+            <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+            <p class="article-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": []
+}
+{% endschema %}

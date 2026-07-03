@@ -1,0 +1,32 @@
+<article class="section">
+  <div class="page-width">
+    <div class="article-template__hero">
+      <header class="section-header--center" style="text-align: center; margin-bottom: 3.2rem;">
+        <p class="article-card__date">{{ article.published_at | date: '%B %d, %Y' }} &middot; {{ 'templates.article.written_by' | t: author: article.author }}</p>
+        <h1 class="h1" style="margin-top: 1rem;">{{ article.title | escape }}</h1>
+      </header>
+      {%- if article.image -%}
+        <div class="media">
+          <img
+            srcset="{{ article.image | image_url: width: 900 }} 900w, {{ article.image | image_url: width: 1400 }} 1400w"
+            src="{{ article.image | image_url: width: 1400 }}"
+            sizes="(min-width: 990px) 84rem, 100vw"
+            alt="{{ article.image.alt | escape }}"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+          >
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="article-template__body rte">
+      {{ article.content }}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

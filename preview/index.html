@@ -1,860 +1,409 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuillonCo — Performance Collar Shirts</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --color-black: #0C0C0C;
-      --color-dark: #1A1A1A;
-      --color-dark-2: #252525;
-      --color-volt: #C8FF00;
-      --color-volt-dark: #A8D800;
-      --color-volt-pale: #E8FF99;
-      --color-stone: #F0F0F0;
-      --color-stone-dark: #E0E0E0;
-      --color-bg: #F0F0F0;
-      --color-white: #FFFFFF;
-      --color-gray: #6B6B6B;
-      --color-light: #D8D8D8;
-      --color-charcoal: #2A2A2A;
-      --color-error: #FF3B30;
-      --font-heading: 'Playfair Display', Georgia, serif;
-      --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
-      --font-label: 'Barlow Condensed', 'Helvetica Neue', Arial, sans-serif;
-      --header-height: 80px;
-      --announcement-height: 40px;
-      --content-max-width: 1200px;
-      --page-max-width: 1440px;
-      --transition-fast: 150ms ease;
-      --transition-base: 280ms ease;
-      --transition-slow: 450ms ease;
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.14);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,0.24);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--color-charcoal);
-      background-color: var(--color-bg);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; height: auto; }
-    button { border: none; background: none; cursor: pointer; font-family: inherit; }
-    ul { list-style: none; }
-    h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 500; line-height: 1.15; color: var(--color-black); }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuillonCo — Performance Without Compromise</title>
+<meta name="description" content="Premium performance polos engineered for the course, the office and everywhere in between. QuillonCo — confidence, worn daily.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' font-family='Georgia'>Q</text></svg>">
+<style>
+:root{
+  --font-heading:'Archivo',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --bg:#fff;--surface:#F6F5F2;--text:#16181D;--sub:rgba(22,24,29,.64);--line:rgba(22,24,29,.12);
+  --accent:#1B2A4A;--forest:#22402F;--inv:#fff;--inv-sub:rgba(255,255,255,.72);
+  --gutter:clamp(1.25rem,4vw,3rem);--section:clamp(3.5rem,8vw,7.5rem);
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+h1,h2,h3,.h{font-family:var(--font-heading);line-height:1.08;letter-spacing:-.015em;font-weight:700}
+.page{max-width:1440px;margin:0 auto;padding-inline:var(--gutter)}
+.section{padding-block:var(--section)}
+.eyebrow{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.eyebrow--inv{color:var(--inv-sub)}
+.lead{font-size:clamp(1.05rem,1.9vw,1.25rem);line-height:1.65;color:var(--sub)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:50px;padding:.8rem 2.1rem;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--text);border-radius:2px;background:var(--text);color:#fff;transition:all .35s var(--ease)}
+.btn:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.btn--inv{background:#fff;border-color:#fff;color:var(--text)}
+.btn--inv:hover{background:transparent;color:#fff;border-color:#fff}
+.btn--ghost-inv{background:transparent;border-color:rgba(255,255,255,.6);color:#fff}
+.btn--ghost-inv:hover{background:#fff;border-color:#fff;color:var(--text)}
+.btn--ghost{background:transparent;color:var(--text)}
+.btn--ghost:hover{background:var(--text);color:#fff;transform:translateY(-1px)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-    .container { width: 100%; max-width: var(--content-max-width); margin: 0 auto; padding: 0 2rem; }
-    .container--wide { max-width: var(--page-max-width); }
-    .section-padding { padding: 6rem 0; }
+/* announcement + header */
+.announce{background:var(--accent);color:#fff;text-align:center;padding:.55rem var(--gutter);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.hdr.hide{transform:translateY(-100%)}
+.hdr.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.06)}
+.hdr__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:72px}
+.logo{font-family:var(--font-heading);font-size:clamp(1.25rem,2.4vw,1.6rem);font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-align:center;grid-column:2}
+.logo span{color:var(--accent)}
+.nav{grid-column:1;grid-row:1;display:none;gap:.2rem}
+.nav a{position:relative;padding:.7rem .9rem;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav a::after{content:'';position:absolute;left:.9rem;right:.9rem;bottom:.35rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+.icons{grid-column:3;grid-row:1;display:flex;justify-content:flex-end;gap:.1rem}
+.icons button,.icons a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;position:relative;transition:background .2s}
+.icons button:hover,.icons a:hover{background:var(--surface)}
+.icons svg{width:20px;height:20px}
+.bubble{position:absolute;top:5px;right:2px;min-width:17px;height:17px;padding:0 4px;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:#fff;background:var(--accent);border-radius:10px}
+.burger{grid-column:1;grid-row:1;justify-self:start;display:flex;width:44px;height:44px;align-items:center;justify-content:center}
+@media(min-width:990px){.nav{display:flex}.burger{display:none}.hdr__in{min-height:80px}}
 
-    .eyebrow {
-      font-family: var(--font-label);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--color-volt-dark);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .eyebrow--volt { color: var(--color-volt); }
+/* hero */
+.hero{position:relative;min-height:max(88svh,560px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;isolation:isolate}
+.hero__media{position:absolute;inset:0;z-index:-2}
+.hero__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.hero__ov{position:absolute;inset:0;z-index:-1;background:linear-gradient(200deg,rgba(10,13,18,0) 30%,rgba(10,13,18,.62) 100%)}
+.hero__c{width:100%;padding-block:clamp(2.5rem,8vw,5.5rem)}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.02em;max-width:16ch;text-wrap:balance}
+.hero p{margin-top:1.2rem;font-size:clamp(1rem,1.8vw,1.2rem);color:var(--inv-sub);max-width:34rem}
+.hero__btns{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.hint{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--inv-sub);animation:bob 2.4s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem 2.25rem;
-      font-family: var(--font-label);
-      font-size: 0.875rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 2px solid transparent;
-      border-radius: 0;
-      cursor: pointer;
-      transition: all var(--transition-base);
-      white-space: nowrap;
-      min-width: 160px;
-    }
-    .btn--volt { background: var(--color-volt); color: var(--color-black); border-color: var(--color-volt); }
-    .btn--volt:hover { background: var(--color-volt-dark); border-color: var(--color-volt-dark); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(200,255,0,0.35); }
-    .btn--outline-white { background: transparent; color: var(--color-white); border-color: var(--color-white); }
-    .btn--outline-white:hover { background: var(--color-white); color: var(--color-black); }
-    .btn--primary { background: var(--color-black); color: var(--color-white); border-color: var(--color-black); }
-    .btn--primary:hover { background: var(--color-dark-2); transform: translateY(-1px); }
-    .btn--secondary { background: transparent; color: var(--color-black); border-color: var(--color-black); }
-    .btn--secondary:hover { background: var(--color-black); color: var(--color-white); }
-    .btn--full { width: 100%; }
-    .btn--lg { padding: 1.2rem 2.75rem; font-size: 1rem; }
+/* section headers */
+.shead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:clamp(1.75rem,4.5vw,3.1rem)}
+.shead h2{font-size:clamp(1.65rem,4vw,2.75rem)}
+.shead--c{flex-direction:column;align-items:center;text-align:center}
+.linkarrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding-bottom:.25rem;border-bottom:1px solid currentColor;transition:gap .2s var(--ease),opacity .2s}
+.linkarrow:hover{gap:.85rem;opacity:.7}
 
-    /* Announcement Bar */
-    .announcement-bar {
-      background: var(--color-volt);
-      color: var(--color-black);
-      text-align: center;
-      padding: 0.6rem 1rem;
-      font-family: var(--font-label);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      min-height: var(--announcement-height);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .announcement-bar span { opacity: 0.5; font-size: 0.6rem; }
+/* collection tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(min-width:990px){.tiles{grid-template-columns:repeat(4,1fr);gap:1.25rem}}
+.tile{position:relative;display:block;border-radius:4px;overflow:hidden;color:#fff;isolation:isolate}
+.tile .ph{position:relative;padding-bottom:128%;background:var(--surface);overflow:hidden}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.tile:hover img{transform:scale(1.05)}
+.tile::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(185deg,rgba(10,13,18,0) 45%,rgba(10,13,18,.6) 100%)}
+.tile__c{position:absolute;inset:auto 0 0 0;z-index:2;padding:1.4rem;display:flex;flex-direction:column;gap:.25rem}
+.tile__c h3{font-size:clamp(1.1rem,2.2vw,1.5rem)}
+.tile__cta{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:all .35s var(--ease)}
+.tile:hover .tile__cta{opacity:1;transform:none}
+@media(hover:none){.tile__cta{opacity:1;transform:none}}
 
-    /* Header */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-light);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-    }
-    .header-inner {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      height: var(--header-height);
-      gap: 2rem;
-    }
-    .header-nav { display: flex; align-items: center; gap: 2.5rem; }
-    .header-nav__link {
-      font-family: var(--font-label);
-      font-size: 0.875rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-charcoal);
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-    }
-    .header-nav__link:hover { color: var(--color-black); border-bottom-color: var(--color-volt); }
-    .header-logo { text-align: center; justify-self: center; }
-    .header-logo__text {
-      font-family: var(--font-heading);
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--color-black);
-      line-height: 1;
-    }
-    .header-logo__text em { color: var(--color-volt-dark); font-style: italic; }
-    .header-logo__tagline {
-      font-family: var(--font-label);
-      font-size: 0.55rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--color-gray);
-      margin-top: 3px;
-      font-weight: 700;
-    }
-    .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 1.25rem; }
-    .header-actions__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-charcoal);
-      transition: color var(--transition-fast);
-      position: relative;
-    }
-    .header-actions__btn:hover { color: var(--color-black); }
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--color-volt);
-      color: var(--color-black);
-      font-family: var(--font-label);
-      font-size: 0.6rem;
-      font-weight: 700;
-      min-width: 18px;
-      height: 18px;
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* product cards */
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem 1rem;list-style:none}
+@media(min-width:750px){.grid4{grid-template-columns:repeat(4,1fr);gap:2.5rem 1.5rem}}
+.card{position:relative;display:flex;flex-direction:column}
+.card__m{position:relative;border-radius:4px;overflow:hidden;background:var(--surface)}
+.card__m .ph{position:relative;padding-bottom:125%;overflow:hidden}
+.card__m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.card:hover .card__m img{transform:scale(1.04)}
+.badge{position:absolute;top:12px;left:12px;z-index:2;padding:.3rem .7rem;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:2px;background:var(--text);color:#fff}
+.qa{position:absolute;left:10px;right:10px;bottom:10px;z-index:3;opacity:0;transform:translateY(8px);transition:all .35s var(--ease)}
+.card:hover .qa{opacity:1;transform:none}
+@media(hover:none){.qa{display:none}}
+.qa__p{background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-radius:4px;padding:.6rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.25)}
+.qa__l{display:block;text-align:center;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem}
+.qa__o{display:flex;gap:.3rem;justify-content:center}
+.qa__o button{min-width:36px;padding:.4rem .5rem;font-size:.72rem;font-weight:600;border:1px solid var(--line);border-radius:2px;background:#fff;transition:all .2s var(--ease)}
+.qa__o button:hover{background:var(--text);border-color:var(--text);color:#fff}
+.card__c{padding-top:.9rem;display:flex;flex-direction:column;gap:.2rem}
+.card__t{font-size:.95rem;font-weight:600;line-height:1.35;font-family:var(--font-body)}
+.card__p{font-size:.9rem}
+.sw{display:flex;gap:.35rem;margin-top:.35rem}
+.sw span{width:15px;height:15px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
 
-    /* Hero */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      max-height: 900px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      background: var(--color-black);
-    }
-    .hero__media { position: absolute; inset: 0; z-index: 0; }
-    .hero__image { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 100%);
-    }
-    .hero__content { position: relative; z-index: 1; color: var(--color-white); max-width: 640px; }
-    .hero__eyebrow { color: var(--color-volt); margin-bottom: 1rem; }
-    .hero__heading {
-      font-family: var(--font-heading);
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      color: var(--color-white);
-      margin-bottom: 1.5rem;
-    }
-    .hero__heading em { font-style: italic; color: var(--color-volt); }
-    .hero__body {
-      font-size: 1.125rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 2.5rem;
-      max-width: 460px;
-    }
-    .hero__actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .hero__scroll {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255,255,255,0.35);
-      font-family: var(--font-label);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      animation: scrollBounce 2s ease-in-out infinite;
-    }
-    @keyframes scrollBounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
+/* story */
+.story{display:grid;gap:2rem;align-items:center}
+@media(min-width:990px){.story{grid-template-columns:1fr 1fr;gap:clamp(2.5rem,7vw,5.5rem)}}
+.story__m{border-radius:4px;overflow:hidden}
+.story__m .ph{position:relative;padding-bottom:88%;overflow:hidden}
+.story__m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.story__m:hover img{transform:scale(1.05)}
+.story h2{font-size:clamp(1.65rem,4vw,2.75rem)}
+.story .lead{margin-top:1.25rem;max-width:32rem}
+.stats{display:flex;gap:2.25rem;margin-top:2.25rem;padding-top:1.9rem;border-top:1px solid var(--line)}
+.stat b{font-family:var(--font-heading);font-size:clamp(1.6rem,3.2vw,2.25rem);font-weight:700;line-height:1}
+.stat small{display:block;margin-top:.45rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sub)}
+.story .btn{margin-top:2rem}
 
-    /* Values Strip */
-    .values-strip {
-      background: var(--color-black);
-      padding: 2rem 0;
-      border-top: 3px solid var(--color-volt);
-    }
-    .values-strip__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
-    .value-item { display: flex; align-items: center; gap: 1rem; }
-    .value-item__icon { flex-shrink: 0; color: var(--color-volt); }
-    .value-item__text strong {
-      display: block;
-      font-family: var(--font-label);
-      font-size: 0.875rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-white);
-    }
-    .value-item__text span { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+/* tech */
+.dark{background:var(--text);color:#fff}
+.dark .lead{color:var(--inv-sub)}
+.tech{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(min-width:750px){.tech{grid-template-columns:repeat(4,1fr);gap:1.25rem}}
+.tcard{padding:1.75rem 1.5rem;border:1px solid rgba(255,255,255,.12);border-radius:4px;transition:all .35s var(--ease)}
+.tcard:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.04);transform:translateY(-4px)}
+.tcard svg{width:30px;height:30px;margin-bottom:1.1rem;opacity:.9}
+.tcard h3{font-size:.95rem;font-weight:600;margin-bottom:.4rem;font-family:var(--font-body)}
+.tcard p{font-size:.83rem;line-height:1.55;color:var(--inv-sub)}
 
-    /* Section Header */
-    .section-header { text-align: center; margin-bottom: 4rem; }
-    .section-header h2 { font-size: clamp(2rem, 3vw, 3.25rem); font-weight: 700; margin-bottom: 1rem; }
-    .section-header p { font-size: 1.125rem; color: var(--color-gray); max-width: 520px; margin: 0 auto; }
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
+@media(min-width:750px){.gal{grid-template-columns:repeat(4,1fr)}}
+.gal a{position:relative;display:block;overflow:hidden;color:#fff;isolation:isolate}
+.gal .ph{position:relative;padding-bottom:135%;overflow:hidden}
+.gal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.gal a:hover img{transform:scale(1.05)}
+.gal a::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(185deg,rgba(10,13,18,0) 55%,rgba(10,13,18,.5) 100%);opacity:0;transition:opacity .35s}
+.gal a:hover::after{opacity:1}
+.gal figcaption{position:absolute;inset:auto 0 0 0;z-index:2;padding:1.25rem;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:all .35s var(--ease)}
+.gal a:hover figcaption{opacity:1;transform:none}
+@media(hover:none){.gal a::after,.gal figcaption{opacity:1;transform:none}}
 
-    /* Product Grid */
-    .product-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
-    .product-card { display: flex; flex-direction: column; position: relative; }
-    .product-card__media {
-      position: relative;
-      overflow: hidden;
-      background: var(--color-stone-dark);
-      aspect-ratio: 3/4;
-      margin-bottom: 1rem;
-    }
-    .product-card__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition-slow);
-    }
-    .product-card:hover .product-card__image { transform: scale(1.04); }
-    .product-card__badge {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      background: var(--color-volt);
-      color: var(--color-black);
-      font-family: var(--font-label);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-    }
-    .product-card__quick-add {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--color-black);
-      color: var(--color-volt);
-      text-align: center;
-      padding: 1rem;
-      font-family: var(--font-label);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transform: translateY(100%);
-      transition: transform var(--transition-base);
-    }
-    .product-card:hover .product-card__quick-add { transform: translateY(0); }
-    .product-card__vendor {
-      font-family: var(--font-label);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-volt-dark);
-      margin-bottom: 0.25rem;
-      font-weight: 700;
-    }
-    .product-card__title {
-      font-family: var(--font-heading);
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: var(--color-black);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-    .product-card__price {
-      font-family: var(--font-label);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--color-charcoal);
-      margin-top: auto;
-      letter-spacing: 0.04em;
-    }
-    .product-card__swatches { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
-    .color-swatch {
-      width: 16px;
-      height: 16px;
-      border-radius: 9999px;
-      border: 1.5px solid var(--color-light);
-      cursor: pointer;
-    }
+/* testimonials */
+.soft{background:var(--surface)}
+.tst{display:grid;gap:1rem}
+@media(min-width:750px){.tst{grid-template-columns:repeat(3,1fr);gap:1.25rem}}
+.tcard2{display:flex;flex-direction:column;padding:2rem 1.75rem;background:#fff;border:1px solid var(--line);border-radius:4px;transition:all .35s var(--ease)}
+.tcard2:hover{transform:translateY(-4px);box-shadow:0 24px 48px -20px rgba(0,0,0,.12)}
+.stars{display:flex;gap:3px;color:var(--accent);margin-bottom:1.1rem;letter-spacing:.15em}
+.tcard2 blockquote{font-size:1rem;line-height:1.6;flex:1}
+.tcard2 footer{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+.tcard2 b{font-size:.88rem}
+.tcard2 small{display:block;font-size:.78rem;color:var(--sub);margin-top:.15rem}
 
-    /* Collection Showcase */
-    .collection-showcase { background: var(--color-bg); }
-    .collection-showcase__grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 1rem;
-      height: 600px;
-    }
-    .showcase-card {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      cursor: pointer;
-    }
-    .showcase-card__image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition-slow);
-    }
-    .showcase-card:hover .showcase-card__image { transform: scale(1.05); }
-    .showcase-card__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.08) 60%);
-    }
-    .showcase-card__content {
-      position: relative;
-      z-index: 1;
-      padding: 2rem;
-      color: var(--color-white);
-    }
-    .showcase-card__label {
-      font-family: var(--font-label);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--color-volt);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .showcase-card__title {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--color-white);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-    .showcase-card__link {
-      font-family: var(--font-label);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--color-volt);
-      border-bottom: 1px solid var(--color-volt);
-      padding-bottom: 2px;
-      display: inline-block;
-    }
+/* newsletter */
+.news{max-width:39rem;margin:0 auto;text-align:center}
+.news h2{font-size:clamp(1.65rem,4vw,2.75rem)}
+.news .lead{margin-top:.9rem}
+.news form{display:flex;gap:.6rem;max-width:29rem;margin:2rem auto 0}
+.news input{flex:1;min-height:50px;padding:.9rem 1.1rem;font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:2px;background:transparent}
+.news input:focus{outline:none;border-color:var(--text)}
+@media(max-width:550px){.news form{flex-direction:column}}
 
-    /* Brand Story */
-    .brand-story { background: var(--color-stone-dark); }
-    .brand-story__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
-    .brand-story__media { position: relative; overflow: hidden; }
-    .brand-story__image { width: 100%; height: 100%; object-fit: cover; }
-    .brand-story__content { display: flex; align-items: center; padding: 5rem 4rem; }
-    .brand-story__inner { max-width: 480px; }
-    .brand-story__heading { font-size: clamp(2rem, 3vw, 3.25rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
-    .brand-story__body { color: var(--color-gray); font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem; }
-    .brand-story__stats { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-light); margin-top: 2rem; }
-    .stat-item__number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-black); line-height: 1; }
-    .stat-item__number em { color: var(--color-volt-dark); font-style: normal; }
-    .stat-item__label { font-family: var(--font-label); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-gray); font-weight: 700; margin-top: 0.25rem; }
+/* social */
+.soc{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+@media(min-width:750px){.soc{grid-template-columns:repeat(6,1fr)}}
+.soc a{position:relative;display:block;overflow:hidden}
+.soc .ph{position:relative;padding-bottom:100%;overflow:hidden}
+.soc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .9s var(--ease)}
+.soc a::after{content:'';position:absolute;inset:0;z-index:1;background:rgba(12,14,18,.35);opacity:0;transition:opacity .35s}
+.soc svg{position:absolute;top:50%;left:50%;z-index:2;width:24px;height:24px;color:#fff;transform:translate(-50%,-50%) scale(.8);opacity:0;transition:all .35s var(--ease)}
+.soc a:hover::after{opacity:1}
+.soc a:hover svg{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.soc a:hover img{transform:scale(1.05)}
 
-    /* Testimonials */
-    .testimonials { background: var(--color-black); padding: 6rem 0; }
-    .testimonials__eyebrow { color: var(--color-volt); text-align: center; margin-bottom: 0.75rem; }
-    .testimonials__heading { font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 3.25rem); font-weight: 700; color: var(--color-white); text-align: center; margin-bottom: 0.75rem; }
-    .testimonials__sub { color: rgba(255,255,255,0.45); text-align: center; font-size: 1.125rem; margin-bottom: 4rem; }
-    .testimonials__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .testimonial-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 2rem;
-      transition: background var(--transition-base), border-color var(--transition-base);
-    }
-    .testimonial-card:hover { background: rgba(200,255,0,0.05); border-color: rgba(200,255,0,0.25); }
-    .testimonial-card__stars { display: flex; gap: 4px; margin-bottom: 1.25rem; color: var(--color-volt); font-size: 1rem; }
-    .testimonial-card__quote { font-family: var(--font-heading); font-style: italic; font-size: 1.125rem; line-height: 1.65; color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; }
-    .testimonial-card__author { display: flex; align-items: center; gap: 1rem; }
-    .testimonial-card__avatar { width: 44px; height: 44px; border-radius: 9999px; background: var(--color-volt); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 1.125rem; color: var(--color-black); font-weight: 700; flex-shrink: 0; }
-    .testimonial-card__name { font-family: var(--font-label); font-weight: 700; font-size: 0.875rem; color: var(--color-white); letter-spacing: 0.06em; text-transform: uppercase; }
-    .testimonial-card__location { font-family: var(--font-label); font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
-
-    /* Newsletter */
-    .newsletter { background: var(--color-stone-dark); padding: 6rem 0; text-align: center; position: relative; overflow: hidden; }
-    .newsletter::before { content: 'QC'; position: absolute; font-family: var(--font-heading); font-size: 20rem; font-weight: 700; color: rgba(0,0,0,0.04); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; letter-spacing: -0.05em; }
-    .newsletter__inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
-    .newsletter__heading { font-size: clamp(2rem, 3vw, 3.25rem); margin-bottom: 1rem; }
-    .newsletter__body { color: var(--color-gray); font-size: 1.125rem; margin-bottom: 2rem; line-height: 1.7; }
-    .newsletter__form { display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto 1rem; }
-    .newsletter__input { flex: 1; padding: 1rem 1.25rem; border: 2px solid var(--color-light); background: var(--color-white); font-size: 0.875rem; color: var(--color-charcoal); outline: none; font-family: var(--font-body); }
-    .newsletter__input:focus { border-color: var(--color-black); }
-    .newsletter__privacy { font-family: var(--font-label); font-size: 0.75rem; color: var(--color-gray); letter-spacing: 0.05em; }
-
-    /* Footer */
-    .site-footer { background: var(--color-black); color: var(--color-white); padding-top: 5rem; }
-    .footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .footer-brand__logo { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; letter-spacing: 0.04em; color: var(--color-white); margin-bottom: 1rem; }
-    .footer-brand__logo em { color: var(--color-volt); font-style: italic; }
-    .footer-brand__tagline { font-family: var(--font-label); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-volt); font-weight: 700; margin-bottom: 1.25rem; }
-    .footer-brand__description { font-size: 0.875rem; color: rgba(255,255,255,0.4); line-height: 1.75; margin-bottom: 1.5rem; }
-    .footer-social { display: flex; gap: 0.75rem; }
-    .footer-social__link { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: var(--color-white); font-family: var(--font-label); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast); }
-    .footer-social__link:hover { border-color: var(--color-volt); background: var(--color-volt); color: var(--color-black); }
-    .footer-col__title { font-family: var(--font-label); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-white); margin-bottom: 1.25rem; }
-    .footer-col__links { display: flex; flex-direction: column; gap: 0.75rem; }
-    .footer-col__link { font-size: 0.875rem; color: rgba(255,255,255,0.4); transition: color var(--transition-fast); }
-    .footer-col__link:hover { color: var(--color-volt); }
-    .footer-bottom { padding: 1.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .footer-bottom__copy { font-family: var(--font-label); font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
-    .footer-bottom__payments { display: flex; align-items: center; gap: 0.5rem; }
-    .payment-icon { background: rgba(255,255,255,0.08); padding: 2px 6px; font-family: var(--font-label); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
-
-    .volt-bar { height: 3px; background: var(--color-volt); }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .header-nav { display: none; }
-      .header-inner { grid-template-columns: auto 1fr auto; }
-      .values-strip__grid { grid-template-columns: repeat(2,1fr); }
-      .collection-showcase__grid { grid-template-columns: 1fr 1fr; height: auto; }
-      .collection-showcase__grid > :first-child { grid-column: 1 / -1; height: 360px; }
-      .brand-story__grid { grid-template-columns: 1fr; }
-      .brand-story__media { height: 400px; }
-      .testimonials__grid { grid-template-columns: repeat(2,1fr); }
-      .footer-main { grid-template-columns: 1fr 1fr; }
-      .product-grid { grid-template-columns: repeat(3,1fr); }
-    }
-    @media (max-width: 768px) {
-      .container { padding: 0 1.25rem; }
-      .section-padding { padding: 4rem 0; }
-      .product-grid { grid-template-columns: repeat(2,1fr); }
-      .testimonials__grid { grid-template-columns: 1fr; }
-      .hero__heading { font-size: clamp(2.75rem, 10vw, 4.5rem); }
-      .hero__actions { flex-direction: column; align-items: flex-start; }
-      .footer-main { grid-template-columns: 1fr; }
-      .newsletter__form { flex-direction: column; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .brand-story__content { padding: 2.5rem 1.5rem; }
-      .brand-story__stats { gap: 2rem; }
-    }
-  </style>
+/* footer */
+.ftr{background:var(--text);color:#fff}
+.ftr__band{border-bottom:1px solid rgba(255,255,255,.12);padding-block:clamp(2.25rem,6vw,4rem)}
+.ftr__band .in{display:grid;gap:1.5rem;align-items:center}
+@media(min-width:990px){.ftr__band .in{grid-template-columns:1fr 1fr;gap:3.75rem}}
+.ftr__band form{display:flex;gap:.6rem;max-width:30rem}
+.ftr__band input{flex:1;min-height:50px;padding:.9rem 1.1rem;font:inherit;font-size:.95rem;border:1px solid rgba(255,255,255,.24);border-radius:2px;background:transparent;color:#fff}
+.ftr__band input::placeholder{color:rgba(255,255,255,.5)}
+.ftr__band input:focus{outline:none;border-color:#fff}
+.ftr__main{display:grid;gap:2.5rem;padding-block:clamp(2.5rem,6vw,4.4rem)}
+@media(min-width:750px){.ftr__main{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:990px){.ftr__main{grid-template-columns:2fr repeat(3,1fr);gap:1.9rem}}
+.ftr__brand p{margin-top:1rem;max-width:21rem;font-size:.88rem;line-height:1.7;color:var(--inv-sub)}
+.ftr h4{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--inv-sub);margin-bottom:1.1rem;font-family:var(--font-body)}
+.ftr ul{list-style:none;display:grid;gap:.25rem}
+.ftr ul a{display:inline-block;padding:.3rem 0;font-size:.9rem;color:var(--inv-sub);transition:color .2s}
+.ftr ul a:hover{color:#fff}
+.socials{display:flex;gap:.4rem;margin-top:1.5rem}
+.socials a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:50%;transition:all .2s var(--ease)}
+.socials a:hover{background:#fff;border-color:#fff;color:var(--text)}
+.socials svg{width:17px;height:17px}
+.ftr__bot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;padding-block:1.5rem;border-top:1px solid rgba(255,255,255,.12);font-size:.78rem;color:var(--inv-sub)}
+.ftr__bot ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
+.note{background:var(--surface);text-align:center;padding:.8rem var(--gutter);font-size:.78rem;color:var(--sub)}
+.note a{text-decoration:underline;text-underline-offset:.2em}
+</style>
 </head>
 <body>
 
-  <!-- Announcement Bar -->
-  <div class="announcement-bar">
-    Free Shipping on Orders Over $150
-    <span>&middot;</span>
-    Engineered for the Active South
-    <span>&middot;</span>
-    4-Way Stretch Technology
+<div class="announce">Complimentary shipping on orders over $150</div>
+
+<header class="hdr" id="hdr">
+  <div class="page hdr__in">
+    <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="nav" aria-label="Main">
+      <a href="#shop">Shop</a>
+      <a href="#new">New Arrivals</a>
+      <a href="#best">Best Sellers</a>
+      <a href="#tech">Technology</a>
+      <a href="#story">About</a>
+    </nav>
+    <a class="logo" href="#">Quillon<span>Co</span></a>
+    <div class="icons">
+      <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+      <a href="#" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></a>
+      <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 12.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><span class="bubble">2</span></button>
+    </div>
   </div>
+</header>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container container--wide">
-      <div class="header-inner">
-        <nav class="header-nav">
-          <a href="#" class="header-nav__link">Collections</a>
-          <a href="#" class="header-nav__link">Technology</a>
-          <a href="#" class="header-nav__link">About</a>
-        </nav>
-        <a href="#" class="header-logo">
-          <div class="header-logo__text">Quillon<em>Co</em></div>
-          <div class="header-logo__tagline">Performance &amp; Precision</div>
-        </a>
-        <div class="header-actions">
-          <button class="header-actions__btn" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          </button>
-          <button class="header-actions__btn" aria-label="Account">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </button>
-          <button class="header-actions__btn" aria-label="Cart">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            <span class="cart-count">2</span>
-          </button>
-        </div>
-      </div>
+<section class="hero">
+  <div class="hero__media"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233529_381f4b7d-6700-47b3-bdb7-889de6481f74.png" alt="Athlete in a charcoal QuillonCo performance polo on a coastal golf course at dawn" fetchpriority="high"></div>
+  <div class="hero__ov"></div>
+  <div class="page hero__c">
+    <span class="eyebrow eyebrow--inv reveal in">The Performance Polo, Perfected</span>
+    <h1 class="reveal in d1">Performance Without Compromise.</h1>
+    <p class="reveal in d2">Premium performance polos engineered for the course, the office and everywhere in between.</p>
+    <div class="hero__btns reveal in d3">
+      <a class="btn btn--inv" href="#best">Shop Polos</a>
+      <a class="btn btn--ghost-inv" href="#shop">Explore the Collection</a>
     </div>
-  </header>
+  </div>
+  <div class="hint" aria-hidden="true">Scroll<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="m5 9 7 7 7-7"/></svg></div>
+</section>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero__media">
-      <img class="hero__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="QuillonCo performance collar shirt">
-      <div class="hero__overlay"></div>
+<section class="section" id="shop">
+  <div class="page">
+    <div class="shead">
+      <div><span class="eyebrow reveal">Shop by Category</span><h2 class="reveal d1">Built for Every Arena</h2></div>
     </div>
-    <div class="container">
-      <div class="hero__content">
-        <span class="eyebrow eyebrow--volt hero__eyebrow">New Drop &mdash; Summer 2025</span>
-        <h1 class="hero__heading">Built to<br><em>Move.</em> Built<br>to Last.</h1>
-        <p class="hero__body">Performance collar shirts engineered for the athlete who refuses to choose between style and function.</p>
-        <div class="hero__actions">
-          <a href="#" class="btn btn--volt btn--lg">Shop the Collection</a>
-          <a href="#" class="btn btn--outline-white btn--lg">Our Story</a>
-        </div>
-      </div>
+    <div class="tiles">
+      <a class="tile reveal" href="#"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233554_0d8b4097-e6db-426a-bb1f-035b9b2d4b2d_min.webp" alt="Performance polos at the country club"></div><div class="tile__c"><h3>Performance Polos</h3><span class="tile__cta">View Collection →</span></div></a>
+      <a class="tile reveal d1" href="#"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233557_1ab33fcd-e013-47e8-be6e-dd28125ff1c9_min.webp" alt="New arrivals — tennis club"></div><div class="tile__c"><h3>New Arrivals</h3><span class="tile__cta">View Collection →</span></div></a>
+      <a class="tile reveal d2" href="#"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233555_bea96c5d-4b71-4d5f-8630-fd8846b54577_min.webp" alt="Best sellers — office"></div><div class="tile__c"><h3>Best Sellers</h3><span class="tile__cta">View Collection →</span></div></a>
+      <a class="tile reveal d3" href="#"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233559_3e350de4-902b-4951-a03f-83773f007208_min.webp" alt="Everyday essentials — travel"></div><div class="tile__c"><h3>Everyday Essentials</h3><span class="tile__cta">View Collection →</span></div></a>
     </div>
-    <div class="hero__scroll">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      Scroll
-    </div>
-  </section>
+  </div>
+</section>
 
-  <div class="volt-bar"></div>
-
-  <!-- Values Strip -->
-  <section class="values-strip">
-    <div class="container">
-      <div class="values-strip__grid">
-        <div class="value-item">
-          <div class="value-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="value-item__text"><strong>Free Shipping</strong><span>On all orders $150+</span></div>
-        </div>
-        <div class="value-item">
-          <div class="value-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg></div>
-          <div class="value-item__text"><strong>4-Way Stretch</strong><span>Moves with you</span></div>
-        </div>
-        <div class="value-item">
-          <div class="value-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="value-item__text"><strong>Anti-Odor Tech</strong><span>All-day fresh guarantee</span></div>
-        </div>
-        <div class="value-item">
-          <div class="value-item__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3l9 9-9 9"/></svg></div>
-          <div class="value-item__text"><strong>Easy Returns</strong><span>30-day hassle-free</span></div>
-        </div>
-      </div>
+<section class="section" id="best" style="padding-top:0">
+  <div class="page">
+    <div class="shead">
+      <div><span class="eyebrow reveal">The Essentials</span><h2 class="reveal d1">Best Sellers</h2></div>
+      <a class="linkarrow reveal d2" href="#">View All →</a>
     </div>
-  </section>
+    <ul class="grid4">
+      <li class="card reveal"><div class="card__m"><span class="badge" style="background:var(--accent)">Best Seller</span><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233539_d7002d85-30b8-41ef-93a8-97400d74aeec_min.webp" alt="The Fairway Polo — Navy"></div><div class="qa"><div class="qa__p"><span class="qa__l">Quick Add — Select Size</span><div class="qa__o"><button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button></div></div></div></div><div class="card__c"><h3 class="card__t">The Fairway Polo — Navy</h3><div class="card__p">$88</div><div class="sw"><span style="background:#1B2A4A"></span><span style="background:#22402F"></span><span style="background:#F2F1EC"></span><span style="background:#2C3038"></span></div></div></li>
+      <li class="card reveal d1"><div class="card__m"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233540_e490e605-9ce0-4d23-bc29-77033a291e7a_min.webp" alt="The Club Polo — Forest"></div><div class="qa"><div class="qa__p"><span class="qa__l">Quick Add — Select Size</span><div class="qa__o"><button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button></div></div></div></div><div class="card__c"><h3 class="card__t">The Club Polo — Forest</h3><div class="card__p">$88</div><div class="sw"><span style="background:#22402F"></span><span style="background:#1B2A4A"></span><span style="background:#2C3038"></span></div></div></li>
+      <li class="card reveal d2"><div class="card__m"><span class="badge">New</span><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233542_ec3205d6-430b-4045-b264-f6609f16e370_min.webp" alt="The Classic Polo — White"></div><div class="qa"><div class="qa__p"><span class="qa__l">Quick Add — Select Size</span><div class="qa__o"><button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button></div></div></div></div><div class="card__c"><h3 class="card__t">The Classic Polo — White</h3><div class="card__p">$84</div><div class="sw"><span style="background:#F2F1EC"></span><span style="background:#1B2A4A"></span><span style="background:#2C3038"></span></div></div></li>
+      <li class="card reveal d3"><div class="card__m"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233612_49d275a0-5297-4a63-bee9-3dc5a2cf8524_min.webp" alt="The Evening Polo — Deep Navy"></div><div class="qa"><div class="qa__p"><span class="qa__l">Quick Add — Select Size</span><div class="qa__o"><button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button></div></div></div></div><div class="card__c"><h3 class="card__t">The Evening Polo — Deep Navy</h3><div class="card__p">$92</div><div class="sw"><span style="background:#1B2A4A"></span><span style="background:#16181D"></span></div></div></li>
+    </ul>
+  </div>
+</section>
 
-  <!-- Featured Collection -->
-  <section class="section-padding" style="background: var(--color-bg);">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">The Collection</span>
-        <h2>Performance Series</h2>
-        <p>Each shirt is precision-cut for the athlete who demands more.</p>
+<section class="section" id="story" style="padding-top:0">
+  <div class="page story">
+    <div class="story__m reveal"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233544_8d381104-77dd-45e1-b034-1d12513e1e18_min.webp" alt="Tailor inspecting QuillonTech performance fabric"></div></div>
+    <div>
+      <span class="eyebrow reveal">The QuillonCo Standard</span>
+      <h2 class="reveal d1">Obsessed With the Details You Feel</h2>
+      <p class="lead reveal d2">QuillonCo was founded on a simple belief: the shirt you wear should work as hard as you do. Every polo begins with technical fabric engineered for movement, then passes through a construction process measured in millimeters — precise collars that keep their shape, seams that never chafe, and a tailored fit that moves from first tee to final meeting without missing a beat.</p>
+      <div class="stats reveal d3">
+        <div class="stat"><b>4-Way</b><small>Stretch fabric</small></div>
+        <div class="stat"><b>UPF 50</b><small>Sun protection</small></div>
+        <div class="stat"><b>60+</b><small>Fit iterations</small></div>
       </div>
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-card__media">
-            <img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233900_c864c65c-63c1-4418-b34e-d804ae2b502a.png" alt="Performance Collar Shirt">
-            <span class="product-card__badge">New</span>
-            <div class="product-card__quick-add">+ Quick Add</div>
-          </div>
-          <div class="product-card__vendor">QuillonCo</div>
-          <div class="product-card__title">The Performance Collar</div>
-          <div class="product-card__price">$88.00</div>
-          <div class="product-card__swatches">
-            <div class="color-swatch" style="background:#0C0C0C;"></div>
-            <div class="color-swatch" style="background:#C8FF00; border-color:#ccc;"></div>
-            <div class="color-swatch" style="background:#2A2A2A;"></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-card__media">
-            <img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233909_d46895f2-77e1-4a47-baa4-b4bc98a062af.png" alt="Training Collar Shirt">
-            <div class="product-card__quick-add">+ Quick Add</div>
-          </div>
-          <div class="product-card__vendor">QuillonCo</div>
-          <div class="product-card__title">The Training Collar</div>
-          <div class="product-card__price">$92.00</div>
-          <div class="product-card__swatches">
-            <div class="color-swatch" style="background:#1A1A1A;"></div>
-            <div class="color-swatch" style="background:#F0F0F0; border-color:#ccc;"></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-card__media">
-            <img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Field Edition Collar Shirt">
-            <span class="product-card__badge">Bestseller</span>
-            <div class="product-card__quick-add">+ Quick Add</div>
-          </div>
-          <div class="product-card__vendor">QuillonCo</div>
-          <div class="product-card__title">Field Edition</div>
-          <div class="product-card__price">$96.00</div>
-          <div class="product-card__swatches">
-            <div class="color-swatch" style="background:#0C0C0C;"></div>
-            <div class="color-swatch" style="background:#252525;"></div>
-            <div class="color-swatch" style="background:#A8D800; border-color:#ccc;"></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-card__media">
-            <img class="product-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234027_f8f9f7c5-8020-43f8-99f4-a31b75536873.png" alt="Collar Detail Shirt">
-            <div class="product-card__quick-add">+ Quick Add</div>
-          </div>
-          <div class="product-card__vendor">QuillonCo</div>
-          <div class="product-card__title">Collar Detail Edition</div>
-          <div class="product-card__price">$84.00</div>
-          <div class="product-card__swatches">
-            <div class="color-swatch" style="background:#0C0C0C;"></div>
-            <div class="color-swatch" style="background:#6B6B6B;"></div>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top: 3rem;">
-        <a href="#" class="btn btn--secondary btn--lg">View All Products</a>
-      </div>
+      <a class="btn btn--ghost reveal d4" href="#">Our Story</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Collection Showcase -->
-  <section class="collection-showcase" style="padding-bottom: 6rem;">
-    <div class="container container--wide">
-      <div class="collection-showcase__grid">
-        <div class="showcase-card">
-          <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="Performance Series">
-          <div class="showcase-card__overlay"></div>
-          <div class="showcase-card__content">
-            <div class="showcase-card__label">Featured</div>
-            <div class="showcase-card__title">Performance Series</div>
-            <a href="#" class="showcase-card__link">Shop Now &rarr;</a>
-          </div>
-        </div>
-        <div class="showcase-card">
-          <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Active Series">
-          <div class="showcase-card__overlay"></div>
-          <div class="showcase-card__content">
-            <div class="showcase-card__label">Active</div>
-            <div class="showcase-card__title">Active Series</div>
-            <a href="#" class="showcase-card__link">Shop Now &rarr;</a>
-          </div>
-        </div>
-        <div class="showcase-card">
-          <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234027_f8f9f7c5-8020-43f8-99f4-a31b75536873.png" alt="Signature Edit">
-          <div class="showcase-card__overlay"></div>
-          <div class="showcase-card__content">
-            <div class="showcase-card__label">Signature</div>
-            <div class="showcase-card__title">Signature Edit</div>
-            <a href="#" class="showcase-card__link">Shop Now &rarr;</a>
-          </div>
-        </div>
-      </div>
+<section class="section dark" id="tech">
+  <div class="page">
+    <div class="shead shead--c">
+      <div style="text-align:center"><span class="eyebrow eyebrow--inv reveal">QuillonTech™ Fabric</span><h2 class="reveal d1">Engineered for Everything</h2></div>
     </div>
-  </section>
-
-  <!-- Brand Story -->
-  <section class="brand-story">
-    <div class="brand-story__grid container--wide" style="max-width: var(--page-max-width); margin: 0 auto;">
-      <div class="brand-story__media">
-        <img class="brand-story__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233809_257d39fb-75c5-4724-bccf-f1d588241b5b.png" alt="The QuillonCo Standard">
-      </div>
-      <div class="brand-story__content">
-        <div class="brand-story__inner">
-          <span class="eyebrow">Our Standard</span>
-          <h2 class="brand-story__heading">The QuillonCo Standard</h2>
-          <p class="brand-story__body">Engineered in the South. Built for Everywhere.</p>
-          <p class="brand-story__body">Every QuillonCo shirt starts with a question: what does the modern athlete actually need? The answer is fabric that breathes through a full-court press, a collar that holds its shape from morning lift to evening out, and construction that moves with your body &mdash; not against it.</p>
-          <p class="brand-story__body">Moisture-wicking. Four-way stretch. Anti-odor technology. These aren&rsquo;t marketing buzzwords &mdash; they&rsquo;re the baseline.</p>
-          <a href="#" class="btn btn--primary">Our Story</a>
-          <div class="brand-story__stats">
-            <div class="stat-item">
-              <div class="stat-item__number">4<em>&times;</em></div>
-              <div class="stat-item__label">Stretch All Directions</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-item__number">48<em>h</em></div>
-              <div class="stat-item__label">Anti-Odor Protection</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-item__number">100<em>%</em></div>
-              <div class="stat-item__label">Satisfaction Guaranteed</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="tech">
+      <div class="tcard reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3Z"/></svg><h3>Moisture Wicking</h3><p>Sweat is pulled off the skin and dispersed to evaporate fast, so you stay dry through the back nine.</p></div>
+      <div class="tcard reveal d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M4 12l3-3m-3 3 3 3m13-3-3-3m3 3-3 3M12 4v16M12 4 9 7m3-3 3 3m-3 13-3-3m3 3 3-3"/></svg><h3>Four-Way Stretch</h3><p>Fabric that moves in every direction with full recovery — no bagging, no restriction, full swing.</p></div>
+      <div class="tcard reveal d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17c3-4 6 4 9 0s6 4 9 0"/><path d="M3 10c3-4 6 4 9 0s6 4 9 0"/></svg><h3>Wrinkle Resistant</h3><p>Out of the suitcase and straight to dinner. Our knit resists creasing without a single pass of an iron.</p></div>
+      <div class="tcard reveal d3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.2 5C22 6.8 22 9.6 20.3 11.4L11 20.6H4v-7l9.2-9.2c1.8-1.7 4.6-1.7 6.4 0Z"/><path d="M16 6.6 6 16.6"/></svg><h3>Featherweight</h3><p>A barely-there hand feel that layers cleanly under a blazer or quarter-zip in any season.</p></div>
+      <div class="tcard reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h9a3 3 0 1 0-3-3M3 12h14a3 3 0 1 1-3 3M3 16h6a2.5 2.5 0 1 1-2.5 2.5"/></svg><h3>Breathable Knit</h3><p>An open-structure weave circulates air where you heat up most, keeping your core temperature down.</p></div>
+      <div class="tcard reveal d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.1 2.1m10 10 2.1 2.1m0-14.2-2.1 2.1m-10 10-2.1 2.1"/></svg><h3>Quick Dry</h3><p>Rinse it in the hotel sink and it's ready by morning. Engineered to dry hours faster than cotton.</p></div>
+      <div class="tcard reveal d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21a9 9 0 1 1 9-9"/><path d="m16 16 5 5m0-5-5 5"/></svg><h3>Odor Resistant</h3><p>An anti-microbial finish neutralizes odor at the source — fresh from the first meeting to the last hole.</p></div>
+      <div class="tcard reveal d3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z"/><circle cx="12" cy="11" r="2.5"/></svg><h3>UPF 50 Protection</h3><p>Built-in sun protection that blocks 98% of UV rays for long days on the course or the water.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <span class="eyebrow eyebrow--volt testimonials__eyebrow">Real Athletes. Real Results.</span>
-      <h2 class="testimonials__heading">Worn by the Best</h2>
-      <p class="testimonials__sub">From the gym to the field &mdash; hear it from the people who actually wear us.</p>
-      <div class="testimonials__grid">
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">&starf;&starf;&starf;&starf;&starf;</div>
-          <p class="testimonial-card__quote">&ldquo;I wore this on the court, at dinner, and back to the gym the next morning. Held up every time. The collar stays crisp no matter what you put it through.&rdquo;</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">M</div>
-            <div><div class="testimonial-card__name">Marcus Webb</div><div class="testimonial-card__location">Atlanta, GA</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">&starf;&starf;&starf;&starf;&starf;</div>
-          <p class="testimonial-card__quote">&ldquo;Finally a shirt that moves with me during training and still looks sharp enough to walk into a meeting afterward. The stretch is unreal &mdash; zero restriction.&rdquo;</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">D</div>
-            <div><div class="testimonial-card__name">Darius Cole</div><div class="testimonial-card__location">Houston, TX</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-card__stars">&starf;&starf;&starf;&starf;&starf;</div>
-          <p class="testimonial-card__quote">&ldquo;These shirts have ruined every other brand for me. The anti-odor tech is not a gimmick &mdash; I&rsquo;ve tested it. QuillonCo is the only collar shirt I&rsquo;ll touch now.&rdquo;</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">T</div>
-            <div><div class="testimonial-card__name">Tyler Fontenot</div><div class="testimonial-card__location">New Orleans, LA</div></div>
-          </div>
-        </div>
-      </div>
+<section>
+  <div class="page" style="padding-block:var(--section) 0"><div class="shead shead--c"><div style="text-align:center"><span class="eyebrow reveal">Course to Boardroom</span><h2 class="reveal d1" style="font-size:clamp(1.65rem,4vw,2.75rem)">One Shirt. Every Arena.</h2></div></div></div>
+  <div class="gal">
+    <a href="#" class="reveal"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233554_0d8b4097-e6db-426a-bb1f-035b9b2d4b2d_min.webp" alt="The Club"></div><figcaption>The Club</figcaption></a>
+    <a href="#" class="reveal d1"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233555_bea96c5d-4b71-4d5f-8630-fd8846b54577_min.webp" alt="The Office"></div><figcaption>The Office</figcaption></a>
+    <a href="#" class="reveal d2"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233557_1ab33fcd-e013-47e8-be6e-dd28125ff1c9_min.webp" alt="The Court"></div><figcaption>The Court</figcaption></a>
+    <a href="#" class="reveal d3"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233612_49d275a0-5297-4a63-bee9-3dc5a2cf8524_min.webp" alt="The Evening"></div><figcaption>The Evening</figcaption></a>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="page">
+    <div class="shead shead--c"><div style="text-align:center"><span class="eyebrow reveal">The Word Is Out</span><h2 class="reveal d1">Worn With Confidence</h2></div></div>
+    <div class="tst">
+      <div class="tcard2 reveal"><div class="stars">★★★★★</div><blockquote>“The only polo I've owned that looks as sharp at a client dinner as it does on the first tee. I bought three more the same week.”</blockquote><footer><b>Michael R.</b><small>Verified Buyer — The Fairway Polo</small></footer></div>
+      <div class="tcard2 reveal d1"><div class="stars">★★★★★</div><blockquote>“Wore it through a cross-country flight, straight into a board meeting. Zero wrinkles, zero complaints. This fabric is unreal.”</blockquote><footer><b>David T.</b><small>Verified Buyer — The Traveler Polo</small></footer></div>
+      <div class="tcard2 reveal d2"><div class="stars">★★★★★</div><blockquote>“Finally — a performance polo with a collar that doesn't curl. The fit is tailored without being tight. Worth every dollar.”</blockquote><footer><b>James K.</b><small>Verified Buyer — The Club Polo</small></footer></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Newsletter -->
-  <section class="newsletter">
-    <div class="newsletter__inner">
-      <span class="eyebrow">Stay In The Game</span>
-      <h2 class="newsletter__heading">First to the Drop</h2>
-      <p class="newsletter__body">Get early access to new collections, training content, and exclusive offers &mdash; straight to your inbox.</p>
-      <form class="newsletter__form" onsubmit="return false;">
-        <input class="newsletter__input" type="email" placeholder="Your email address" aria-label="Email address">
-        <button type="submit" class="btn btn--primary">Subscribe</button>
+<section class="section" id="new">
+  <div class="page news">
+    <span class="eyebrow reveal">The Inside Line</span>
+    <h2 class="reveal d1">First Access. No Noise.</h2>
+    <p class="lead reveal d2">New drops, member-only offers and stories worth reading. One email a week, never more.</p>
+    <form class="reveal d3" onsubmit="event.preventDefault();this.innerHTML='<p style=\'font-weight:600\'>Thanks for subscribing. Welcome to the club.</p>'">
+      <input type="email" placeholder="Email address" required aria-label="Email address">
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<section style="padding-bottom:var(--section)">
+  <div class="page"><div class="shead shead--c"><div style="text-align:center"><span class="eyebrow reveal">@quillonco</span><h2 class="reveal d1" style="font-size:clamp(1.65rem,4vw,2.75rem)">In the Wild</h2></div></div></div>
+  <div class="soc">
+    <a href="#" class="reveal"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233554_0d8b4097-e6db-426a-bb1f-035b9b2d4b2d_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="#" class="reveal d1"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233539_d7002d85-30b8-41ef-93a8-97400d74aeec_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="#" class="reveal d2"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233557_1ab33fcd-e013-47e8-be6e-dd28125ff1c9_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="#" class="reveal d3"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233612_49d275a0-5297-4a63-bee9-3dc5a2cf8524_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="#" class="reveal d4"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233540_e490e605-9ce0-4d23-bc29-77033a291e7a_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="#" class="reveal d4"><div class="ph"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260702_233559_3e350de4-902b-4951-a03f-83773f007208_min.webp" alt=""></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="ftr__band">
+    <div class="page in">
+      <div><h3 class="h" style="font-size:1.4rem">Join the club</h3><p style="margin-top:.5rem;color:var(--inv-sub);font-size:.9rem">New drops, member offers and stories from the course — straight to your inbox.</p></div>
+      <form onsubmit="event.preventDefault();this.innerHTML='<p style=\'font-weight:600\'>Thanks for subscribing. Welcome to the club.</p>'">
+        <input type="email" placeholder="Email address" required aria-label="Email address">
+        <button class="btn btn--inv" type="submit">Subscribe</button>
       </form>
-      <p class="newsletter__privacy">No spam. Unsubscribe anytime.</p>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-main">
-        <div class="footer-brand">
-          <div class="footer-brand__logo">Quillon<em>Co</em></div>
-          <div class="footer-brand__tagline">Performance &amp; Precision</div>
-          <p class="footer-brand__description">Athletic collar shirts built for the South and worn everywhere. Where performance meets precision &mdash; every rep, every rep.</p>
-          <div class="footer-social">
-            <a href="#" class="footer-social__link" aria-label="Instagram">IG</a>
-            <a href="#" class="footer-social__link" aria-label="TikTok">TK</a>
-            <a href="#" class="footer-social__link" aria-label="Twitter">X</a>
-            <a href="#" class="footer-social__link" aria-label="Facebook">FB</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col__title">Shop</div>
-          <div class="footer-col__links">
-            <a href="#" class="footer-col__link">All Shirts</a>
-            <a href="#" class="footer-col__link">Performance Series</a>
-            <a href="#" class="footer-col__link">Active Series</a>
-            <a href="#" class="footer-col__link">Signature Edit</a>
-            <a href="#" class="footer-col__link">New Arrivals</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col__title">Brand</div>
-          <div class="footer-col__links">
-            <a href="#" class="footer-col__link">Our Story</a>
-            <a href="#" class="footer-col__link">Technology</a>
-            <a href="#" class="footer-col__link">Sustainability</a>
-            <a href="#" class="footer-col__link">Press</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col__title">Support</div>
-          <div class="footer-col__links">
-            <a href="#" class="footer-col__link">Size Guide</a>
-            <a href="#" class="footer-col__link">Shipping &amp; Returns</a>
-            <a href="#" class="footer-col__link">Care Instructions</a>
-            <a href="#" class="footer-col__link">Contact Us</a>
-            <a href="#" class="footer-col__link">FAQ</a>
-          </div>
+  </div>
+  <div class="page">
+    <div class="ftr__main">
+      <div class="ftr__brand">
+        <div class="logo" style="text-align:left;grid-column:auto">Quillon<span style="color:rgba(255,255,255,.55)">Co</span></div>
+        <p>Premium performance polos engineered for the course, the office and everywhere in between. Confidence, worn daily.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H21l-7.3 8.3L22 21h-6.6l-5.2-6.3L4.3 21H1l7.8-8.9L2 3h6.8l4.7 5.7L17.7 3Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.7 2 12 2 12s0 3.3.4 4.8a2.5 2.5 0 0 0 1.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg></a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-bottom__copy">&copy; 2025 QuillonCo. All rights reserved.</p>
-        <div class="footer-bottom__payments">
-          <span class="payment-icon">Visa</span>
-          <span class="payment-icon">MC</span>
-          <span class="payment-icon">Amex</span>
-          <span class="payment-icon">Apple Pay</span>
-          <span class="payment-icon">Shop Pay</span>
-        </div>
-      </div>
+      <div><h4>Shop</h4><ul><li><a href="#">Performance Polos</a></li><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Everyday Essentials</a></li><li><a href="#">Gift Cards</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="#">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns &amp; Exchanges</a></li><li><a href="#">Size Guide</a></li><li><a href="#">FAQ</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">Our Story</a></li><li><a href="#">QuillonTech™</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
     </div>
-  </footer>
+    <div class="ftr__bot">
+      <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li></ul>
+      <small>© 2026 QuillonCo. All rights reserved.</small>
+    </div>
+  </div>
+</footer>
 
+<div class="note">Static preview of the QuillonCo homepage — the full Shopify theme lives in <a href="https://github.com/carterferachi/quillonco" rel="noopener">shopify-theme/</a> with cart drawer, product, collection &amp; search templates.</div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.05});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+let last=0;const h=document.getElementById('hdr');
+addEventListener('scroll',()=>{const y=scrollY;h.classList.toggle('scrolled',y>24);
+if(y>400&&y>last+8)h.classList.add('hide');else if(y<last-4||y<400)h.classList.remove('hide');last=y},{passive:true});
+</script>
 </body>
 </html>

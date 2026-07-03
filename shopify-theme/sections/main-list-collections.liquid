@@ -1,0 +1,55 @@
+<section class="section">
+  <div class="page-width">
+    <header class="page-header">
+      <h1 class="h1">{{ section.settings.title | escape }}</h1>
+    </header>
+    {%- paginate collections by 12 -%}
+      <div class="collection-showcase__grid">
+        {%- for collection in collections -%}
+          <div class="scroll-trigger" data-cascade="{{ forloop.index | modulo: 4 | plus: 1 }}">
+            <a href="{{ collection.url }}" class="collection-tile media-zoom-hover">
+              <div class="media">
+                {%- assign tile_image = collection.featured_image | default: collection.products.first.featured_media -%}
+                {%- if tile_image -%}
+                  <img
+                    srcset="{{ tile_image | image_url: width: 480 }} 480w, {{ tile_image | image_url: width: 720 }} 720w, {{ tile_image | image_url: width: 1000 }} 1000w"
+                    src="{{ tile_image | image_url: width: 720 }}"
+                    sizes="(min-width: 990px) 25vw, 50vw"
+                    alt="{{ collection.title | escape }}"
+                    loading="lazy"
+                    width="{{ tile_image.width }}"
+                    height="{{ tile_image.height }}"
+                  >
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="collection-tile__content">
+                <h2 class="collection-tile__title">{{ collection.title | escape }}</h2>
+                <span class="collection-tile__cta">
+                  {{ 'sections.collection_list.view_collection' | t }}
+                  {% render 'icon', icon: 'arrow-right' %}
+                </span>
+              </div>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections"
+    }
+  ]
+}
+{% endschema %}

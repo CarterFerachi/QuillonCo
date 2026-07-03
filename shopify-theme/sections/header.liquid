@@ -1,36 +1,245 @@
-<header class="site-header">
-  <div class="container container--wide">
-    <div class="header-inner">
-      <nav class="header-nav">
-        <a href="/collections/all" class="header-nav__link">Collections</a>
-        <a href="/pages/technology" class="header-nav__link">Technology</a>
-        <a href="/pages/about" class="header-nav__link">About</a>
-      </nav>
-      <a href="/" class="header-logo">
-        <div class="header-logo__text">Quillon<em>Co</em></div>
-        <div class="header-logo__tagline">Performance &amp; Precision</div>
-      </a>
-      <div class="header-actions">
-        <a href="/search" class="header-actions__btn" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </a>
-        <a href="/account" class="header-actions__btn" aria-label="Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
-        <a href="/cart" class="header-actions__btn" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          {%- if cart.item_count > 0 -%}
-            <span class="cart-count">{{ cart.item_count }}</span>
+<sticky-header class="header-wrapper" data-sticky="{{ section.settings.sticky_header }}">
+  <header class="header page-width">
+    <button
+      class="header__icon header__menu-toggle medium-hide"
+      type="button"
+      data-drawer-open="MenuDrawer"
+      aria-label="{{ 'sections.header.menu' | t }}"
+      aria-haspopup="dialog"
+    >
+      {% render 'icon', icon: 'menu' %}
+    </button>
+
+    <nav class="header__inline-menu" aria-label="{{ 'sections.header.menu' | t }}">
+      <ul class="list-menu" role="list">
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.links != blank -%}
+            <li>
+              <header-menu class="mega-menu">
+                <details>
+                  <summary class="header__menu-item" aria-expanded="false" role="button">
+                    <span>{{ link.title | escape }}</span>
+                    {% render 'icon', icon: 'chevron-down' %}
+                    <span class="header__active-underline"></span>
+                  </summary>
+                  {%- assign has_grandchildren = false -%}
+                  {%- for child in link.links -%}
+                    {%- if child.links != blank -%}{%- assign has_grandchildren = true -%}{%- endif -%}
+                  {%- endfor -%}
+                  {%- if has_grandchildren -%}
+                    <div class="mega-menu__content">
+                      <div class="page-width">
+                        <div class="mega-menu__inner">
+                          {%- for child in link.links -%}
+                            <div>
+                              {%- if child.url != '#' -%}
+                                <a class="mega-menu__heading" href="{{ child.url }}">{{ child.title | escape }}</a>
+                              {%- else -%}
+                                <span class="mega-menu__heading">{{ child.title | escape }}</span>
+                              {%- endif -%}
+                              {%- if child.links != blank -%}
+                                <ul class="mega-menu__list" role="list">
+                                  {%- for grandchild in child.links -%}
+                                    <li><a class="mega-menu__link" href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+                            </div>
+                          {%- endfor -%}
+                          {%- if section.settings.mega_menu_image != blank -%}
+                            <a href="{{ section.settings.mega_menu_link | default: routes.all_products_collection_url }}" class="mega-menu__feature">
+                              <div class="media media--landscape media-zoom-hover">
+                                <img
+                                  src="{{ section.settings.mega_menu_image | image_url: width: 600 }}"
+                                  srcset="{{ section.settings.mega_menu_image | image_url: width: 400 }} 400w, {{ section.settings.mega_menu_image | image_url: width: 600 }} 600w"
+                                  sizes="20vw"
+                                  alt="{{ section.settings.mega_menu_image.alt | default: section.settings.mega_menu_heading | escape }}"
+                                  loading="lazy"
+                                  width="{{ section.settings.mega_menu_image.width }}"
+                                  height="{{ section.settings.mega_menu_image.height }}"
+                                >
+                              </div>
+                              {%- if section.settings.mega_menu_heading != blank -%}
+                                <p class="mega-menu__feature-title">{{ section.settings.mega_menu_heading | escape }}</p>
+                              {%- endif -%}
+                            </a>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <div class="header__dropdown">
+                      <ul class="mega-menu__list" role="list">
+                        {%- for child in link.links -%}
+                          <li><a class="mega-menu__link" href="{{ child.url }}">{{ child.title | escape }}</a></li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                </details>
+              </header-menu>
+            </li>
+          {%- else -%}
+            <li>
+              <a class="header__menu-item{% if link.current %} header__menu-item--active{% endif %}" href="{{ link.url }}">
+                <span>{{ link.title | escape }}</span>
+                <span class="header__active-underline"></span>
+              </a>
+            </li>
           {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <h1 class="header__heading">
+      <a href="{{ routes.root_url }}" class="header__heading-link">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            srcset="{{ section.settings.logo | image_url: width: 300 }} 1x, {{ section.settings.logo | image_url: width: 600 }} 2x"
+            alt="{{ shop.name | escape }}"
+            class="header__heading-logo"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+          >
+        {%- else -%}
+          Quillon<span class="logo-mark">Co</span>
+        {%- endif -%}
+      </a>
+    </h1>
+
+    <div class="header__icons">
+      <button class="header__icon" type="button" data-drawer-open="SearchDrawer" aria-label="{{ 'sections.header.search' | t }}" aria-haspopup="dialog">
+        {% render 'icon', icon: 'search' %}
+      </button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="header__icon small-hide" href="{{ routes.account_url }}" aria-label="{{ 'sections.header.account' | t }}">
+          {% render 'icon', icon: 'account' %}
         </a>
-      </div>
+      {%- endif -%}
+      {%- if section.settings.show_wishlist -%}
+        <a class="header__icon small-hide" href="{{ section.settings.wishlist_url | default: '#' }}" aria-label="{{ 'sections.header.wishlist' | t }}">
+          {% render 'icon', icon: 'heart' %}
+        </a>
+      {%- endif -%}
+      <a class="header__icon" href="{{ routes.cart_url }}" data-drawer-open="CartDrawer" aria-label="{{ 'sections.header.cart' | t }}" data-cart-count-wrapper>
+        {% render 'icon', icon: 'cart' %}
+        <span class="cart-count-bubble" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </header>
+</sticky-header>
+
+<drawer-element id="MenuDrawer" class="menu-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="menu-drawer__overlay" data-drawer-close></div>
+  <div class="menu-drawer__panel">
+    <div class="menu-drawer__header">
+      <span class="drawer__title">{{ 'sections.header.menu' | t }}</span>
+      <button class="drawer__close" type="button" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <ul role="list">
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            {%- if link.links != blank -%}
+              <details>
+                <summary class="menu-drawer__item">
+                  <span>{{ link.title | escape }}</span>
+                  {% render 'icon', icon: 'chevron-down' %}
+                </summary>
+                <ul class="menu-drawer__submenu" role="list">
+                  {%- for child in link.links -%}
+                    <li>
+                      {%- if child.links != blank -%}
+                        <details>
+                          <summary class="menu-drawer__item">
+                            <span>{{ child.title | escape }}</span>
+                            {% render 'icon', icon: 'chevron-down' %}
+                          </summary>
+                          <ul class="menu-drawer__submenu" role="list">
+                            {%- for grandchild in child.links -%}
+                              <li><a class="menu-drawer__item" href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- else -%}
+                        <a class="menu-drawer__item" href="{{ child.url }}">{{ child.title | escape }}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a class="menu-drawer__item" href="{{ link.url }}">{{ link.title | escape }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="menu-drawer__footer">
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="button button--secondary" href="{{ routes.account_url }}">{{ 'sections.header.account' | t }}</a>
+      {%- endif -%}
     </div>
   </div>
-</header>
+</drawer-element>
 
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Leave blank to use the QuillonCo wordmark"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show wishlist icon",
+      "info": "Placeholder — link it to your wishlist app page",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Wishlist link"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu feature"
+    },
+    {
+      "type": "image_picker",
+      "id": "mega_menu_image",
+      "label": "Feature image"
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_heading",
+      "label": "Feature heading",
+      "default": "The Performance Polo"
+    },
+    {
+      "type": "url",
+      "id": "mega_menu_link",
+      "label": "Feature link"
+    }
+  ]
 }
 {% endschema %}

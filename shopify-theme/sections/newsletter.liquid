@@ -1,14 +1,46 @@
-<section class="newsletter">
-  <div class="newsletter__inner">
-    <span class="eyebrow">Stay In The Game</span>
-    <h2 class="newsletter__heading">{{ section.settings.heading }}</h2>
-    <p class="newsletter__body">{{ section.settings.body }}</p>
-    {% form 'customer', class: 'newsletter__form' %}
-      <input type="hidden" name="contact[tags]" value="newsletter">
-      <input class="newsletter__input" type="email" name="contact[email]" placeholder="Your email address" aria-label="Email address" required>
-      <button type="submit" class="btn btn--primary">Subscribe</button>
-    {% endform %}
-    <p class="newsletter__privacy">No spam. Unsubscribe anytime.</p>
+<section class="section{% if section.settings.style == 'dark' %} section--dark{% endif %}">
+  <div class="page-width">
+    <div class="newsletter__box">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow{% if section.settings.style != 'dark' %} eyebrow--accent{% endif %} scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="lead scroll-trigger" data-cascade="2" style="margin-top: 1.4rem;">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'newsletter__form scroll-trigger', id: 'SectionNewsletter-' | append: section.id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="field">
+          <input
+            id="SectionNewsletter-{{ section.id }}-email"
+            type="email"
+            name="contact[email]"
+            class="field__input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            placeholder="{{ 'newsletter.label' | t }}"
+            required
+          >
+          <label class="visually-hidden" for="SectionNewsletter-{{ section.id }}-email">{{ 'newsletter.label' | t }}</label>
+        </div>
+        <button type="submit" class="button{% if section.settings.style == 'dark' %} button--inverse{% endif %}" name="commit">
+          {{ 'newsletter.button_label' | t }}
+        </button>
+        {%- if form.errors -%}
+          <p class="form__message form__message--error" role="alert">
+            {% render 'icon', icon: 'error' %}
+            {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form__message" role="status">{{ 'newsletter.success' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
   </div>
 </section>
 
@@ -16,9 +48,39 @@
 {
   "name": "Newsletter",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "First to the Drop" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "Get early access to new collections, training content, and exclusive offers." }
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "dark", "label": "Dark" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Inside Line"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "First Access. No Noise."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "New drops, member-only offers and stories worth reading. One email a week, never more."
+    }
   ],
-  "presets": [{ "name": "Newsletter" }]
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
 }
 {% endschema %}

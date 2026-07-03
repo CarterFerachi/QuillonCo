@@ -1,0 +1,116 @@
+<section class="section section--flush">
+  {%- if section.settings.heading != blank -%}
+    <div class="page-width">
+      <div class="section-header section-header--center" style="padding-top: var(--section-spacing);">
+        <div class="section-header__text">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow eyebrow--accent scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+          {%- endif -%}
+          <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="lifestyle-gallery">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign fallback = 'life-club'
+        assign fallback_index = forloop.index0 | modulo: 4
+        case fallback_index
+          when 1
+            assign fallback = 'life-office'
+          when 2
+            assign fallback = 'life-tennis'
+          when 3
+            assign fallback = 'life-dinner'
+        endcase
+      -%}
+      {%- capture tile -%}
+        <div class="media media-zoom-hover">
+          {%- if block.settings.image != blank -%}
+            <img
+              srcset="{{ block.settings.image | image_url: width: 480 }} 480w,
+                {{ block.settings.image | image_url: width: 720 }} 720w,
+                {{ block.settings.image | image_url: width: 1080 }} 1080w"
+              src="{{ block.settings.image | image_url: width: 720 }}"
+              sizes="(min-width: 750px) 25vw, 50vw"
+              alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+            >
+          {%- else -%}
+            {% render 'demo-image', name: fallback, alt: block.settings.caption %}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.caption != blank -%}
+          <span class="lifestyle-gallery__caption">{{ block.settings.caption | escape }}</span>
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- if block.settings.link != blank -%}
+        <a href="{{ block.settings.link }}" class="lifestyle-gallery__item" {{ block.shopify_attributes }}>{{ tile }}</a>
+      {%- else -%}
+        <div class="lifestyle-gallery__item" {{ block.shopify_attributes }}>{{ tile }}</div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle gallery",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Course to Boardroom"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One Shirt. Every Arena."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1080 x 1440px recommended"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "The Course"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle gallery",
+      "blocks": [
+        { "type": "image", "settings": { "caption": "The Club" } },
+        { "type": "image", "settings": { "caption": "The Office" } },
+        { "type": "image", "settings": { "caption": "The Court" } },
+        { "type": "image", "settings": { "caption": "The Evening" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

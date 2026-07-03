@@ -3,44 +3,165 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "New Drop — Summer 2025",
-        "heading": "Built to Move.\nBuilt to Last.",
-        "subheading": "Performance collar shirts engineered for the athlete who refuses to choose between style and function.",
-        "button_label": "Shop the Collection",
-        "button_url": "/collections/all",
-        "button2_label": "Our Story",
-        "button2_url": "/pages/about",
-        "overlay_opacity": 65
+        "height": "full",
+        "content_position": "left",
+        "eyebrow": "The Performance Polo, Perfected",
+        "heading": "Performance Without Compromise.",
+        "text": "Premium performance polos engineered for the course, the office and everywhere in between.",
+        "button_label": "Shop Polos",
+        "button_label_2": "Explore the Collection",
+        "show_scroll_hint": true
       }
     },
-    "values": { "type": "values-strip", "settings": {} },
+    "collections": {
+      "type": "collection-showcase",
+      "blocks": {
+        "polos": { "type": "collection", "settings": { "title": "Performance Polos" } },
+        "new": { "type": "collection", "settings": { "title": "New Arrivals" } },
+        "best": { "type": "collection", "settings": { "title": "Best Sellers" } },
+        "essentials": { "type": "collection", "settings": { "title": "Everyday Essentials" } }
+      },
+      "block_order": ["polos", "new", "best", "essentials"],
+      "settings": {
+        "eyebrow": "Shop by Category",
+        "heading": "Built for Every Arena"
+      }
+    },
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "The Collection",
-        "heading": "Performance Series",
-        "subheading": "Each shirt is precision-cut for the athlete who demands more."
+        "eyebrow": "The Essentials",
+        "heading": "Best Sellers",
+        "products_to_show": 4,
+        "show_view_all": true
       }
     },
-    "showcase": { "type": "collection-showcase", "settings": {} },
     "story": {
       "type": "brand-story",
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "value": "4-Way", "label": "Stretch fabric" } },
+        "stat2": { "type": "stat", "settings": { "value": "UPF 50", "label": "Sun protection" } },
+        "stat3": { "type": "stat", "settings": { "value": "60+", "label": "Fit iterations" } }
+      },
+      "block_order": ["stat1", "stat2", "stat3"],
       "settings": {
-        "eyebrow": "Our Standard",
-        "heading": "The QuillonCo Standard",
-        "body": "Engineered in the South. Built for Everywhere. Every QuillonCo shirt starts with a question: what does the modern athlete actually need?",
-        "button_label": "Our Story",
-        "button_url": "/pages/about"
+        "eyebrow": "The QuillonCo Standard",
+        "heading": "Obsessed With the Details You Feel",
+        "button_label": "Our Story"
       }
     },
-    "testimonials": { "type": "testimonials", "settings": {} },
+    "technology": {
+      "type": "technology",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "moisture", "title": "Moisture Wicking", "text": "Sweat is pulled off the skin and dispersed to evaporate fast, so you stay dry through the back nine." } },
+        "f2": { "type": "feature", "settings": { "icon": "stretch", "title": "Four-Way Stretch", "text": "Fabric that moves in every direction with full recovery — no bagging, no restriction, full swing." } },
+        "f3": { "type": "feature", "settings": { "icon": "wrinkle", "title": "Wrinkle Resistant", "text": "Out of the suitcase and straight to dinner. Our knit resists creasing without a single pass of an iron." } },
+        "f4": { "type": "feature", "settings": { "icon": "feather", "title": "Featherweight", "text": "A barely-there hand feel that layers cleanly under a blazer or quarter-zip in any season." } },
+        "f5": { "type": "feature", "settings": { "icon": "breathable", "title": "Breathable Knit", "text": "An open-structure weave circulates air where you heat up most, keeping your core temperature down." } },
+        "f6": { "type": "feature", "settings": { "icon": "quickdry", "title": "Quick Dry", "text": "Rinse it in the hotel sink and it's ready by morning. Engineered to dry hours faster than cotton." } },
+        "f7": { "type": "feature", "settings": { "icon": "odor", "title": "Odor Resistant", "text": "An anti-microbial finish neutralizes odor at the source — fresh from the first meeting to the last hole." } },
+        "f8": { "type": "feature", "settings": { "icon": "upf", "title": "UPF 50 Protection", "text": "Built-in sun protection that blocks 98% of UV rays for long days on the course or the water." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8"],
+      "settings": {
+        "eyebrow": "QuillonTech™ Fabric",
+        "heading": "Engineered for Everything"
+      }
+    },
+    "gallery": {
+      "type": "lifestyle-gallery",
+      "blocks": {
+        "g1": { "type": "image", "settings": { "caption": "The Club" } },
+        "g2": { "type": "image", "settings": { "caption": "The Office" } },
+        "g3": { "type": "image", "settings": { "caption": "The Court" } },
+        "g4": { "type": "image", "settings": { "caption": "The Evening" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4"],
+      "settings": {
+        "eyebrow": "Course to Boardroom",
+        "heading": "One Shirt. Every Arena."
+      }
+    },
+    "new-arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Just Landed",
+        "heading": "New Arrivals",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "background": "surface"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The only polo I've owned that looks as sharp at a client dinner as it does on the first tee. I bought three more the same week.",
+            "author": "Michael R.",
+            "meta": "Verified Buyer — The Fairway Polo"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Wore it through a cross-country flight, straight into a board meeting. Zero wrinkles, zero complaints. This fabric is unreal.",
+            "author": "David T.",
+            "meta": "Verified Buyer — The Traveler Polo"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally — a performance polo with a collar that doesn't curl. The fit is tailored without being tight. Worth every dollar.",
+            "author": "James K.",
+            "meta": "Verified Buyer — The Club Polo"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "eyebrow": "The Word Is Out",
+        "heading": "Worn With Confidence"
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "First to the Drop",
-        "body": "Get early access to new collections, training content, and exclusive offers — straight to your inbox."
+        "style": "light",
+        "eyebrow": "The Inside Line",
+        "heading": "First Access. No Noise.",
+        "text": "New drops, member-only offers and stories worth reading. One email a week, never more."
+      }
+    },
+    "social": {
+      "type": "social-gallery",
+      "blocks": {
+        "s1": { "type": "image" },
+        "s2": { "type": "image" },
+        "s3": { "type": "image" },
+        "s4": { "type": "image" },
+        "s5": { "type": "image" },
+        "s6": { "type": "image" }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6"],
+      "settings": {
+        "handle": "@quillonco",
+        "heading": "In the Wild"
       }
     }
   },
-  "order": ["hero", "values", "featured", "showcase", "story", "testimonials", "newsletter"]
+  "order": [
+    "hero",
+    "collections",
+    "featured",
+    "story",
+    "technology",
+    "gallery",
+    "new-arrivals",
+    "testimonials",
+    "newsletter",
+    "social"
+  ]
 }

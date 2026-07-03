@@ -1,52 +1,168 @@
-<section class="hero">
-  <div class="hero__media">
-    {%- if section.settings.image != blank -%}
-      <img class="hero__image" src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+{%- liquid
+  assign height_class = 'hero--large'
+  if section.settings.height == 'full'
+    assign height_class = 'hero--full'
+  elsif section.settings.height == 'medium'
+    assign height_class = 'hero--medium'
+  endif
+-%}
+
+<section class="hero {{ height_class }}">
+  <parallax-media class="hero__media hero__media--parallax">
+    {%- if section.settings.video != blank -%}
+      {{
+        section.settings.video
+        | video_tag: autoplay: true, loop: true, muted: true, controls: false, preload: 'metadata', image_size: '1600x'
+      }}
+    {%- elsif section.settings.image != blank -%}
+      <img
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w,
+          {{ section.settings.image | image_url: width: 1100 }} 1100w,
+          {{ section.settings.image | image_url: width: 1500 }} 1500w,
+          {{ section.settings.image | image_url: width: 1920 }} 1920w,
+          {{ section.settings.image | image_url: width: 2560 }} 2560w"
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+        fetchpriority="high"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
     {%- else -%}
-      <img class="hero__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="QuillonCo performance collar shirt" loading="eager">
+      {% render 'demo-image', name: 'hero', alt: section.settings.heading, loading: 'eager' %}
     {%- endif -%}
-    <div class="hero__overlay"></div>
-  </div>
-  <div class="container">
-    <div class="hero__content">
+  </parallax-media>
+  <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="hero__content page-width">
+    <div class="hero__box hero__box--{{ section.settings.content_position }}">
       {%- if section.settings.eyebrow != blank -%}
-        <span class="eyebrow eyebrow--volt hero__eyebrow">{{ section.settings.eyebrow }}</span>
+        <span class="eyebrow eyebrow--inverse scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
       {%- endif -%}
-      <h1 class="hero__heading">{{ section.settings.heading | newline_to_br }}</h1>
-      {%- if section.settings.subheading != blank -%}
-        <p class="hero__body">{{ section.settings.subheading }}</p>
+      <h2 class="hero__heading scroll-trigger" data-cascade="1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="hero__text scroll-trigger" data-cascade="2">{{ section.settings.text | escape }}</p>
       {%- endif -%}
-      <div class="hero__actions">
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_url }}" class="btn btn--volt btn--lg">{{ section.settings.button_label }}</a>
-        {%- endif -%}
-        {%- if section.settings.button2_label != blank -%}
-          <a href="{{ section.settings.button2_url }}" class="btn btn--outline-white btn--lg">{{ section.settings.button2_label }}</a>
-        {%- endif -%}
-      </div>
+      {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+        <div class="hero__buttons scroll-trigger" data-cascade="3">
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link }}" class="button button--inverse">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="button button--outline-inverse">{{ section.settings.button_label_2 | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
-  <div class="hero__scroll">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    Scroll
-  </div>
+
+  {%- if section.settings.show_scroll_hint and section.settings.height == 'full' -%}
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      {% render 'icon', icon: 'chevron-down' %}
+    </div>
+  {%- endif -%}
 </section>
-<div class="volt-bar"></div>
 
 {% schema %}
 {
-  "name": "Hero Banner",
+  "name": "Hero banner",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background Image" },
-    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay Opacity", "default": 65 },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Drop — Summer 2025" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Built to Move.\nBuilt to Last." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Performance collar shirts engineered for the athlete who refuses to choose between style and function." },
-    { "type": "text", "id": "button_label", "label": "Button 1 Label", "default": "Shop the Collection" },
-    { "type": "url", "id": "button_url", "label": "Button 1 URL" },
-    { "type": "text", "id": "button2_label", "label": "Button 2 Label", "default": "Our Story" },
-    { "type": "url", "id": "button2_url", "label": "Button 2 URL" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "2560 x 1440px recommended. A bundled campaign image is used until you pick one."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (optional)",
+      "info": "Overrides the image. Plays muted on loop."
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "full", "label": "Full screen" },
+        { "value": "large", "label": "Large" },
+        { "value": "medium", "label": "Medium" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Performance Polo, Perfected"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Performance Without Compromise."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Premium performance polos engineered for the course, the office and everywhere in between."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Polos"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label",
+      "default": "Explore the Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_hint",
+      "label": "Show scroll hint",
+      "default": true
+    }
   ],
-  "presets": [{ "name": "Hero Banner" }]
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
 }
 {% endschema %}

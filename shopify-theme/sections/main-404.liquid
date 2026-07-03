@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="page-width">
+    <div class="template-404__box" style="padding-block: 8vh;">
+      <span class="eyebrow eyebrow--accent">404</span>
+      <h1 class="h1">{{ 'templates.404.title' | t }}</h1>
+      <p class="lead" style="margin-top: 1.6rem;">{{ 'templates.404.subtext' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button" style="margin-top: 3.2rem;">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

@@ -1,4 +1,21 @@
 {
-  "sections": { "main": { "type": "cart-main", "settings": {} } },
-  "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "show_note": true
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Before You Go",
+        "heading": "Complete the Look",
+        "products_to_show": 4,
+        "show_view_all": false,
+        "background": "surface"
+      }
+    }
+  },
+  "order": ["main", "featured"]
 }

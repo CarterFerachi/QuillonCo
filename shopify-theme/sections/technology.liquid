@@ -1,0 +1,105 @@
+<section class="section section--dark">
+  <div class="page-width">
+    <div class="section-header section-header--center">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="lead scroll-trigger" data-cascade="2">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="tech-grid">
+      {%- for block in section.blocks -%}
+        <div class="tech-card scroll-trigger" data-cascade="{{ forloop.index | at_most: 6 }}" {{ block.shopify_attributes }}>
+          <div class="tech-card__icon">
+            {% render 'icon', icon: block.settings.icon %}
+          </div>
+          <h3 class="tech-card__title">{{ block.settings.title | escape }}</h3>
+          <p class="tech-card__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fabric technology",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "QuillonTech™ Fabric"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Engineered for Everything"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Every QuillonCo polo is cut from our proprietary performance knit — built to move, breathe and recover, round after round."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "moisture", "label": "Moisture wicking" },
+            { "value": "stretch", "label": "Four-way stretch" },
+            { "value": "wrinkle", "label": "Wrinkle resistant" },
+            { "value": "feather", "label": "Lightweight" },
+            { "value": "breathable", "label": "Breathable" },
+            { "value": "quickdry", "label": "Quick dry" },
+            { "value": "odor", "label": "Odor resistant" },
+            { "value": "upf", "label": "UPF protection" }
+          ],
+          "default": "moisture"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Moisture Wicking"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Sweat is pulled off the skin and dispersed to evaporate fast, so you stay dry through the back nine."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fabric technology",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "moisture", "title": "Moisture Wicking", "text": "Sweat is pulled off the skin and dispersed to evaporate fast, so you stay dry through the back nine." } },
+        { "type": "feature", "settings": { "icon": "stretch", "title": "Four-Way Stretch", "text": "Fabric that moves in every direction with full recovery — no bagging, no restriction, full swing." } },
+        { "type": "feature", "settings": { "icon": "wrinkle", "title": "Wrinkle Resistant", "text": "Out of the suitcase and straight to dinner. Our knit resists creasing without a single pass of an iron." } },
+        { "type": "feature", "settings": { "icon": "feather", "title": "Featherweight", "text": "A barely-there hand feel that layers cleanly under a blazer or quarter-zip in any season." } },
+        { "type": "feature", "settings": { "icon": "breathable", "title": "Breathable Knit", "text": "An open-structure weave circulates air where you heat up most, keeping your core temperature down." } },
+        { "type": "feature", "settings": { "icon": "quickdry", "title": "Quick Dry", "text": "Rinse it in the hotel sink and it's ready by morning. Engineered to dry hours faster than cotton." } },
+        { "type": "feature", "settings": { "icon": "odor", "title": "Odor Resistant", "text": "An anti-microbial finish neutralizes odor at the source — fresh from the first meeting to the last hole." } },
+        { "type": "feature", "settings": { "icon": "upf", "title": "UPF 50 Protection", "text": "Built-in sun protection that blocks 98% of UV rays for long days on the course or the water." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

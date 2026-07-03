@@ -1,26 +1,197 @@
 {
   "general": {
-    "password_page": {
-      "login_form_heading": "Enter store password",
-      "login_form_password_label": "Password",
-      "login_form_password_placeholder": "Your password",
-      "login_form_submit": "Enter",
-      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    "accessibility": {
+      "skip_to_text": "Skip to content",
+      "close": "Close",
+      "refresh_page": "Choosing a selection results in a full page refresh.",
+      "link_messages": {
+        "new_window": "Opens in a new window."
+      },
+      "menu": "Menu",
+      "unit_price_separator": "per"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "Search products",
+      "results_with_count": {
+        "one": "{{ count }} result for \"{{ terms }}\"",
+        "other": "{{ count }} results for \"{{ terms }}\""
+      },
+      "no_results": "No results found for \"{{ terms }}\". Check the spelling or try a different word.",
+      "products": "Products",
+      "pages": "Pages",
+      "suggestions": "Suggestions",
+      "view_all": "View all results"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{ number }}"
+    },
+    "social": {
+      "links": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "twitter": "X (Twitter)",
+        "youtube": "YouTube",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn"
+      }
+    },
+    "continue_shopping": "Continue shopping"
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "link_messages": {
+      "new_window": "Opens in a new window."
     }
   },
-  "cart": {
-    "general": {
-      "title": "Your cart",
-      "empty": "Your cart is empty",
-      "checkout": "Check out",
-      "continue_shopping": "Continue shopping"
-    }
+  "newsletter": {
+    "label": "Email",
+    "success": "Thanks for subscribing. Welcome to the club.",
+    "button_label": "Subscribe"
+  },
+  "onboarding": {
+    "product_title": "Example product title",
+    "collection_title": "Your collection"
   },
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
       "sold_out": "Sold out",
-      "unavailable": "Unavailable"
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity for {{ product }}",
+        "decrease": "Decrease quantity for {{ product }}"
+      },
+      "price": {
+        "regular_price": "Regular price",
+        "sale_price": "Sale price",
+        "from_price_html": "From {{ price }}"
+      },
+      "media": {
+        "gallery_viewer": "Gallery Viewer",
+        "load_image": "Load image {{ index }} in gallery view",
+        "open_media": "Open media {{ index }} in modal",
+        "zoom": "Zoom",
+        "view_360": "360° view coming soon"
+      },
+      "view_full_details": "View full details",
+      "size_guide": "Size guide",
+      "quick_add": "Quick add",
+      "choose_size": "Select size",
+      "vendor": "Vendor",
+      "include_taxes": "Tax included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+    },
+    "facets": {
+      "filter_and_sort": "Filter and sort",
+      "filter_by_label": "Filter:",
+      "sort_by_label": "Sort by:",
+      "apply": "Apply",
+      "clear": "Clear",
+      "clear_all": "Clear all",
+      "from": "From",
+      "to": "To",
+      "max_price": "The highest price is {{ price }}",
+      "product_count": {
+        "one": "{{ product_count }} of {{ count }} product",
+        "other": "{{ product_count }} of {{ count }} products"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      },
+      "reset": "Reset",
+      "filter_selected": {
+        "one": "{{ count }} selected",
+        "other": "{{ count }} selected"
+      }
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for has moved or no longer exists."
+    },
+    "search": {
+      "title": "Search results",
+      "no_results": "No results found for \"{{ terms }}\". Check the spelling or try a different word.",
+      "search_for": "Search for \"{{ terms }}\""
+    },
+    "cart": {
+      "cart": "Cart"
+    },
+    "contact": {
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone number",
+        "comment": "Message",
+        "send": "Send message",
+        "post_success": "Thanks for reaching out. We'll get back to you as soon as possible.",
+        "error_heading": "Please adjust the following:"
+      }
+    },
+    "blog": {
+      "read_more": "Read more"
+    },
+    "article": {
+      "written_by": "By {{ author }}"
+    }
+  },
+  "sections": {
+    "header": {
+      "announcement": "Announcement",
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      },
+      "account": "Account",
+      "wishlist": "Wishlist",
+      "search": "Search",
+      "cart": "Cart"
+    },
+    "cart": {
+      "title": "Your cart",
+      "caption": "Cart items",
+      "remove_title": "Remove {{ title }}",
+      "subtotal": "Subtotal",
+      "new_subtotal": "New subtotal",
+      "note": "Order special instructions",
+      "checkout": "Check out",
+      "empty": "Your cart is empty",
+      "cart_error": "There was an error while updating your cart. Please try again.",
+      "error": "There was an error while updating your cart. Please try again.",
+      "taxes_and_shipping_at_checkout": "Taxes, discounts and shipping calculated at checkout",
+      "free_shipping_progress": "You're {{ amount }} away from free shipping",
+      "free_shipping_unlocked": "Congratulations — your order ships free",
+      "continue_shopping": "Continue shopping",
+      "start_shopping": "Start shopping",
+      "update": "Update",
+      "remove": "Remove"
+    },
+    "footer": {
+      "payment": "Payment methods",
+      "newsletter_heading": "Join the club",
+      "newsletter_text": "New drops, member offers and stories from the course — straight to your inbox."
+    },
+    "collection_list": {
+      "view_collection": "View collection"
+    },
+    "featured_collection": {
+      "view_all": "View all"
+    },
+    "related_products": {
+      "heading": "You may also like"
+    },
+    "recently_viewed": {
+      "heading": "Recently viewed"
     }
   }
 }

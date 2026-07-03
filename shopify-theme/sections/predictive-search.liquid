@@ -1,0 +1,49 @@
+{%- comment -%}
+  Rendered via the Predictive Search API:
+  /search/suggest?q=...&section_id=predictive-search
+{%- endcomment -%}
+<div id="PredictiveSearchResults">
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <h3 class="predictive-search__heading">{{ 'general.search.products' | t }}</h3>
+      <ul class="predictive-search__results" role="list">
+        {%- for product in predictive_search.resources.products -%}
+          <li>
+            <a href="{{ product.url }}" class="predictive-search__item">
+              <div class="media media--portrait">
+                {%- if product.featured_media -%}
+                  <img
+                    src="{{ product.featured_media | image_url: width: 160 }}"
+                    alt="{{ product.featured_media.alt | escape }}"
+                    loading="lazy"
+                    width="80"
+                    height="100"
+                  >
+                {%- endif -%}
+              </div>
+              <div>
+                <p class="predictive-search__item-title">{{ product.title | escape }}</p>
+                <p class="predictive-search__item-price">{{ product.price | money }}</p>
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <p style="margin-top: 2rem;">
+        <a class="link-arrow" href="{{ routes.search_url }}?q={{ predictive_search.terms | escape }}&type=product&options%5Bprefix%5D=last">
+          {{ 'general.search.view_all' | t }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      </p>
+    {%- else -%}
+      <p class="text-subdued">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Predictive search",
+  "settings": []
+}
+{% endschema %}

@@ -1,41 +1,126 @@
-<section class="collection-showcase" style="padding-bottom: 6rem;">
-  <div class="container container--wide">
-    <div class="collection-showcase__grid">
-      <div class="showcase-card">
-        <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_233801_d0540087-e056-48cd-9fa0-5bf579a8c915.png" alt="Performance Series" loading="lazy">
-        <div class="showcase-card__overlay"></div>
-        <div class="showcase-card__content">
-          <div class="showcase-card__label">Featured</div>
-          <div class="showcase-card__title">Performance Series</div>
-          <a href="/collections/all" class="showcase-card__link">Shop Now &rarr;</a>
-        </div>
+<section class="section">
+  <div class="page-width">
+    <div class="section-header">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow eyebrow--accent scroll-trigger">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="h2 scroll-trigger" data-cascade="1">{{ section.settings.heading | escape }}</h2>
       </div>
-      <div class="showcase-card">
-        <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234003_e5646668-09b3-4fcb-8f46-6ffefa03338a.png" alt="Active Series" loading="lazy">
-        <div class="showcase-card__overlay"></div>
-        <div class="showcase-card__content">
-          <div class="showcase-card__label">Active</div>
-          <div class="showcase-card__title">Active Series</div>
-          <a href="/collections/all" class="showcase-card__link">Shop Now &rarr;</a>
+    </div>
+
+    <div class="collection-showcase__grid{% if section.settings.featured_layout %} collection-showcase__grid--featured{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = block.settings.collection
+          assign onboarding_title = 'onboarding.collection_title' | t
+          assign tile_title = block.settings.title | default: collection.title | default: onboarding_title
+          assign tile_url = collection.url | default: routes.all_products_collection_url
+          assign tile_image = block.settings.image | default: collection.featured_image
+          assign fallback = 'life-club'
+          assign fallback_index = forloop.index0 | modulo: 4
+          case fallback_index
+            when 1
+              assign fallback = 'life-tennis'
+            when 2
+              assign fallback = 'life-office'
+            when 3
+              assign fallback = 'life-travel'
+          endcase
+        -%}
+        <div class="scroll-trigger" data-cascade="{{ forloop.index | at_most: 6 }}" {{ block.shopify_attributes }}>
+          <a href="{{ tile_url }}" class="collection-tile media-zoom-hover">
+            <div class="media">
+              {%- if tile_image != blank -%}
+                <img
+                  srcset="{{ tile_image | image_url: width: 480 }} 480w,
+                    {{ tile_image | image_url: width: 720 }} 720w,
+                    {{ tile_image | image_url: width: 1000 }} 1000w,
+                    {{ tile_image | image_url: width: 1400 }} 1400w"
+                  src="{{ tile_image | image_url: width: 720 }}"
+                  sizes="(min-width: 990px) 33vw, 50vw"
+                  alt="{{ tile_image.alt | default: tile_title | escape }}"
+                  loading="lazy"
+                  width="{{ tile_image.width }}"
+                  height="{{ tile_image.height }}"
+                >
+              {%- else -%}
+                {% render 'demo-image', name: fallback, alt: tile_title %}
+              {%- endif -%}
+            </div>
+            <div class="collection-tile__content">
+              <h3 class="collection-tile__title">{{ tile_title | escape }}</h3>
+              <span class="collection-tile__cta">
+                {{ 'sections.collection_list.view_collection' | t }}
+                {% render 'icon', icon: 'arrow-right' %}
+              </span>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="showcase-card">
-        <img class="showcase-card__image" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FVcuBaoBTkgMgDv4hAHDXGVk6V/hf_20260630_234027_f8f9f7c5-8020-43f8-99f4-a31b75536873.png" alt="Signature Edit" loading="lazy">
-        <div class="showcase-card__overlay"></div>
-        <div class="showcase-card__content">
-          <div class="showcase-card__label">Signature</div>
-          <div class="showcase-card__title">Signature Edit</div>
-          <a href="/collections/all" class="showcase-card__link">Shop Now &rarr;</a>
-        </div>
-      </div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Collection Showcase",
-  "settings": [],
-  "presets": [{ "name": "Collection Showcase" }]
+  "name": "Collection showcase",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for Every Arena"
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_layout",
+      "label": "Feature first collection larger",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom title",
+          "info": "Overrides the collection title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "Overrides the collection image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection showcase",
+      "blocks": [
+        { "type": "collection", "settings": { "title": "Performance Polos" } },
+        { "type": "collection", "settings": { "title": "New Arrivals" } },
+        { "type": "collection", "settings": { "title": "Best Sellers" } },
+        { "type": "collection", "settings": { "title": "Everyday Essentials" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
