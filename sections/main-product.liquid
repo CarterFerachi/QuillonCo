@@ -162,7 +162,7 @@
 
             {%- when 'buy_buttons' -%}
               <product-form class="product__buy" {{ block.shopify_attributes }}>
-                {%- form 'product', product, id: 'ProductForm-' | append: section.id, novalidate: 'novalidate' -%}
+                {%- form section.id, novalidate: 'novalidate' -%}
                   <input type="hidden" name="id" value="{{ current_variant.id }}">
                   <div class="product__buy-row">
                     <quantity-input class="quantity">
@@ -522,3 +522,14 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'product', product, id: 'ProductForm-' | append: section.id, novalidate:
+    'novalidate' -%}"
+  to: "{%- form section.id, novalidate: 'novalidate' -%}"
+  position: 8914..8963
+{% endcomment %}

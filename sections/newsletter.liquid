@@ -9,7 +9,7 @@
         <p class="lead scroll-trigger" data-cascade="2" style="margin-top: 1.4rem;">{{ section.settings.text | escape }}</p>
       {%- endif -%}
 
-      {%- form 'customer', class: 'newsletter__form scroll-trigger', id: 'SectionNewsletter-' | append: section.id -%}
+      {%- form section.id -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="field">
           <input
@@ -84,3 +84,14 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'customer', class: 'newsletter__form scroll-trigger', id: 'SectionNewsletter-'
+    | append: section.id -%}"
+  to: "{%- form section.id -%}"
+  position: 682..705
+{% endcomment %}
